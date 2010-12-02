@@ -1,0 +1,16 @@
+#!/usr/bin/env python
+
+# --
+#     Charm start-up script.
+#
+#     This is just an invocation wrapper. (Done for faster start-up.)
+#     The main body of the client is in ljcharm.py
+# --
+
+import ljcharm
+
+if __name__ == "__main__":
+    try:
+	ljcharm.main()
+    except KeyboardInterrupt:
+	print "\n\nReceived Ctrl-C or other break signal. Exiting."

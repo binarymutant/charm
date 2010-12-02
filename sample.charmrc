@@ -1,0 +1,293 @@
+# ---------------------------------------------------------------------------
+# Configuration parameters that you MUST change.
+# ---------------------------------------------------------------------------
+
+# -- Your LiveJournal username and password, separated by a space.
+
+login = test test
+
+# -- Rather than putting your password in plaintext in the 'login'
+#    parameter, you can store the MD5 hex digest of it with 'hlogin'.
+#    To get that, invoke the python interpreter directly, then type:
+#       import ljcharm
+#       print ljcharm.md5digest("yourpassword")
+#    Otherwise, just enter your password in plain text.
+#
+# hlogin = test 098f6bcd4621d373cade4e832627b4f6
+
+
+# -- If you have more than one LiveJournal account, or accounts on multiple
+#    journal sites, you may specify 'login' and 'hlogin' multiple times,
+#    once for each account that you have. You can specify the site for
+#    that username (just the hostname, no http:// or anything).
+#    For instance:
+#    hlogin = test 098f6bcd4621d373cade4e832627b4f6 www.livejournal.com
+#    login = joebloggs test www.blurty.com
+#    login = janeblog test www.deadjournal.com
+
+
+# -- If you have accounts on blogging services that support the Atom API,
+#    such as Blogger, you may specify 'atomblog' and 'hatomblog' parameters,
+#    with your username, password, and, optionally, the URL of the blog
+#    site's Atom API. The URL defaults to https://www.blogger.com/atom/
+#    if you don't specify one.
+#    If your blog site uses WSSE, you must store your password in cleartext
+#    and use 'atomblog'. If your blog site doesn't use WSSE, you can store
+#    your password hashed and use 'hatomblog'. To find your hashed password,
+#    invoke the python interpreter directly, then type:
+#        import base64
+#        base64.encodestring("yourusername:yourpassword")[:-1]
+#    For instance:
+#    atomblog = test test
+#    hatomblog = test dGVzdDp0ZXN0 http://www.typepad.com/t/atom/weblog
+
+
+# -- If you have accounts on blogging services that support the MetaWeb API
+#    (which includes WordPress-based sites), you may specify the 'metaweb'
+#    parameter, with your username, password, and the URL of the blog's
+#    XML-RPC interface for MetaWeb.
+#    For instance:
+#    metaweb = testuser testpasswd http://testuser.wordpress.com/xmlrpc.php
+
+
+# -- The default user is specified by the default_user parameter; if you
+#    configure multiple accounts here, and you don't specify it, you will
+#    be prompted for it when you start the client. You may use the
+#    command-line option -u USERNAME to override the default.
+#
+#    You may leave this option commented out, if you wish.
+#
+# default_user = test
+
+
+# -- You can specify a post URL different than the LiveJournal default,
+#    if most/all of your accounts are on one non-LiveJournal site, and you
+#    don't want to have to specify a hostname for each login/hlogin.
+#    (For LiveJournal-based sites only.)
+#
+# url = http://www.livejournal.com/interface/flat
+
+
+# ---------------------------------------------------------------------------
+# Checkfriends-mode options. (For LiveJournal-based sites only.)
+#
+# Uncomment and change the values to change these from their defaults.
+# ---------------------------------------------------------------------------
+
+# - Normally, all your friends are checked for updates. To check only
+#   specific friend groups by updates, use the checkgroups option. The
+#   list of groups must be comma-separated. Do not put a space before or
+#   after the comma. (If you specify --group on the command line, this
+#   value will be overridden.)
+#
+# checkgroups = Default View,Buddies
+
+# - Specify how often to check for friend updates. This is in minutes.
+#   Note that the server may limit the frequency of such checks.
+#   (If you specify --interval on the command line, it will override
+#   this option.)
+#
+# checkdelay = 15
+
+
+# ---------------------------------------------------------------------------
+# Posting options.
+#
+# Uncomment option lines (remove the leading '# ') to set those options
+# to something different from their defaults.
+#
+# All of these options must be either true or false.
+# "true", "yes", "y", "t", "on", and "1" are all equivalent.
+# "false", "no", "n", "f", "off", and "0" are all equivalent.
+# ---------------------------------------------------------------------------
+
+# - If you turn on nologin, the client will not try to automatically log
+#   you in when you start it up. (Equivalent to using the -n switch.)
+#   (For LiveJournal-based sites only.)
+#
+# nologin = on
+
+# - If you turn off archiving, copies of your posts won't be saved locally.
+#
+# archive = no
+
+# - If you turn off edit archives, when you edit an already-submitted entry,
+#   the new version of the post will not be archived locally.
+#
+# archive_edits = no
+
+# - If you turn on archive overwriting, when you edit an already-submitted
+#   entry and archive it, it will overwrite the original post archive.
+#
+# archive_overwrite = yes
+
+# - If you turn on archive subdirectories, each journal will get its
+#   own subdirectory of posts, in your archives.
+#
+# archive_subdirs = yes
+
+# - If you turn on editing timestamps, when you edit and update an existing
+#   journal post, the edit time will be appended to the end of the entry.
+#
+# edit_times = yes
+
+# - If you turn on showing permissions, when you write a new post after
+#   setting its security permissions, its top line will be "[ To <list>. ]"
+#   i.e., "[ To my friends. ]" for friends-only posts, etc. This can be
+#   modified by the 'groupheader' conf option (see below).
+#   (For LiveJournal-based sites only.)
+#
+# show_permissions = yes
+
+# - If you turn on autodetect, Charm will use XMMS to try to find the
+#   title of the music that you're listening to. This will be repeated
+#   each time you see the posting menu. If you override it by entering
+#   a music title yourself, autodetection will stop.
+#   (For LiveJournal-based sites only.)
+#
+# autodetect = yes
+
+# - If you specify a default filter, when you elect to apply an external
+#   filter from the posting menu, the input field will be automatically
+#   populated with this default. This should be the path to the program
+#   you want to run, plus any arguments.
+#
+# default_filter = Markdown.pl --html4tags
+
+# - If you specify a default template, it will always be read when you
+#   start Charm, and will be used to pre-populate the contents of your
+#   post. Templates have the same format as archive files.
+#
+# default_template = ~/.charm_template
+
+
+# ---------------------------------------------------------------------------
+# More options, also true or false. (For LiveJournal-based sites only.)
+#
+# These are default settings for your posts. They can be changed from
+# within Charm to different values.
+# ---------------------------------------------------------------------------
+
+# - If you turn off autoformat, you must do your own HTML within a post.
+#
+# autoformat = off
+
+# - If you turn off comments, nobody can post comments to your post.
+#
+# comments = no
+
+# - If you turn off email, you will not receive email when someone replies
+#   to your post.
+#
+# noemail = yes
+
+# - If you turn on backdating, the post won't show up in the friends view.
+#
+# backdate = yes
+
+
+# ---------------------------------------------------------------------------
+# Other configuration parameters.
+#
+# Uncomment and change the values to change these from their defaults.
+# You can use ~ expansions for user home directories.
+# ---------------------------------------------------------------------------
+
+# - Directory where draft posts are saved.
+#
+# draft_dir = ~/.ljdrafts
+
+# - Directory where posts are archived.
+#
+# archive_dir = ~/.ljarchive
+
+# - How to organize your archive directory.
+#   If this is "none", all posts will be saved in the archive directory.
+#   If it's "year", there will be sub-directories for each year.
+#   If it's "month", add sub-directories under each year, for each month.
+#
+# organize = none
+
+# - Editor to use. This overrides using the VISUAL and EDITOR environment
+#   variables, if set. Specify the full path name to the program.
+#
+# editor = /usr/bin/emacs
+
+# - Pager to use. This overrides using the PAGER environment variable, if set.
+#   Specify the full path name to the program.
+#
+# pager = /usr/bin/less
+
+# - Spellchecking program to use. You must provide any arguments necessary
+#   for this program to read a file, since it will be passed a filename.
+#   Specify the full path name to the program.
+#
+# spellchecker = /usr/bin/aspell -c
+
+# - Default journal to post to. This can be useful if you mostly post to
+#   a particular community or shared journal, rather than your own journal.
+#   (For LiveJournal-based sites only.)
+#
+# journal = test
+
+# - Default security level of posts. This can be 'public', 'private', or
+#   'friends'-only. The default is public.
+#   (For LiveJournal-based sites only.)
+#
+# security = public
+
+# - Example of a groupheader. This is what shows up at the top of the
+#   post when you have 'show_permissions' turned on. For example, if
+#   you used the groupheader example below, a post restricted to your
+#   Test friends group would begin with '[ To people in my test group. ]'
+#   Format: 'groupheader = Groupname,header text'
+#   (For LiveJournal-based sites only.)
+#
+# groupheader = Test,people in my test group
+
+# - Example of a commpic (community picture). This is the default user
+#   picture keyword that will be used when you post to that community, 
+#   if you haven't set a specific user picture for that post. 
+#   Format: 'commpic = community,picture'
+#   (For LiveJournal-based sites only.)
+#
+# commpic = lj_dev,question
+
+# - Example of a tagpic (tag picture). This is the default user
+#   picture keyword that will be used when you make a post with that tag,
+#   if you haven't set a specific user picture for that post. 
+#   Format: 'tagpic = tag,picture'
+#   (For LiveJournal-based sites only.)
+#
+# tagpic = meme,mypicture
+
+
+# ---------------------------------------------------------------------------
+# Including other rc files.
+#
+# rc files can include other rc files. This is useful if, for instance,
+# you have journals on different LiveJournal-type sites, and you want
+# some configuration settings in common, but other configuration settings
+# (like login, hlogin, and url) to be different.
+#
+# For instance, you could have live.rc for your LiveJournal accounts,
+# dead.rc for your DeadJournal accounts, and u.rc for your uJournal accounts,
+# and have each of them include common.rc for configurations common to all
+# of them. You would then start charm using the -f option to pick a
+# configuration file, i.e., 'charm -f dead.rc' to read your DeadJournal
+# configuration (which would in turn read the common configuration via
+# the include statement).
+# ---------------------------------------------------------------------------
+
+# include common.rc
+
+
+# ---------------------------------------------------------------------------
+# Need a proxy? You should configure that in your shell, not in this
+# configuration file; Python handles proxies transparently. Just set
+# the HTTP_PROXY environment variable in your shell to the
+# hostname:portnumber for the proxy, i.e., you would type
+# 'setenv HTTP_PROXY myproxy.myisp.net:8000' in csh/tcsh, or
+# 'export HTTP_PROXY=myproxy.myisp.net:8000' in bash.
+# ---------------------------------------------------------------------------
+

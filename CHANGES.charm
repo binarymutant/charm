@@ -1,0 +1,346 @@
+January 11th, 2009 -- Charm 1.9.1
+
+Maintenance release:
+
+- Tags, picture keywords, and journals are now displayed in columns.
+- If adding a social bookmark fails, you will be prompted for a retry.
+- If your locale default encoding is UTF8, text is no longer re-encoded.
+- Hyphens in the man page are now escaped.
+- GPL boilerplate is now included in the main file.
+
+---------------------------------------------------------------------------
+
+October 16th, 2008 -- Charm 1.9.0
+
+New features:
+
+- Post templates allow pre-population of post header fields and the creation
+  of a default post body.
+
+- Support for running text filters such as Markdown and Textile on the
+  post body, prior to posting.
+
+- Support for MetaWeb API keyword tags.
+
+- Option --social to automatically add a social bookmark to a blog post.
+  (Currently supports AddThis.)
+
+Fixes and improvements:
+
+- Crossposting works for all formats, including the Atom and MetaWeb APIs.
+
+- Editing a blog post gets the proper local time, rather than keeping it
+  in GMT. It also no longer drops the excerpt field, and the <!--more-->
+  tag is properly supported.
+
+- MetaWeb API categories are separated by commas, not spaces (so category
+  names that are multi-word are properly handled).
+
+- A copy of the GPLv2 is now included as LICENSE, in order to support
+  package distribution requirements.
+
+---------------------------------------------------------------------------
+
+September 12th, 2008 -- Charm 1.8.0
+
+New features:
+
+- Support for the MetaWeb API (WordPress, notably).
+- Command-line cross-posting ability.
+- New -t tags command-line option.
+
+Fixes and improvements:
+
+- Don't post if the message body is empty.
+- Atom API errors now show the exception raised.
+- Documented -j journal option.
+- Moved primary site from Sourceforge to Google Code, for reliability.
+
+---------------------------------------------------------------------------
+
+November 23rd, 2005 -- Charm 1.7.0
+
+New features:
+
+- Support for the Atom API (Movable Type and Blogger, notably).
+
+- Support for LiveJournal's tag system and Movable Type categories.
+
+Fixes and improvements:
+
+- If you use the commpics option, the picture names now show up in the
+  journal selection menu.
+
+- Fixed a typo in username selection.
+
+- Fixed a crash when archive_edits is not set.
+
+- Filenames with spaces should no longer cause problems.
+
+- Prevent loss of lastsync time when the most recent sync resulted in
+  no new journal entries.
+
+- Sync mode should behave better in retrying when there's a failure.
+
+- Began incorporating code cleanup suggestions from Bill Weiss.
+
+---------------------------------------------------------------------------
+
+June 13th, 2005 -- Charm 1.6.0
+
+New features:
+
+- Charm now has a real manual! See the charm.html file.
+
+- Charm now has man pages (for Charm itself, for the charmrc file).
+
+- You can now add, delete, rename, and edit (including changing the sort
+  order) friends groups.
+
+- You can now edit the colors and friends groups of your friends.
+
+- Support for syncitems has been added. This means that you can now
+  efficiently download your entire journal, and keep your offline archive
+  up to date. The new -z, --sync command-line option lets you run Charm
+  in a synchronize-only mode, which is useful for calling it out of cron
+  on a nightly basis.
+
+- The comments screening journal metadata property is now supported. You
+  can choose how you want to screen comments of a post from within Charm.
+
+- Charm supports use of an external spellchecker. By default, this is
+  GNU aspell, but you can set it to whatever you like by changing the
+  "spellchecker" configuration option in your .charmrc.
+
+- You can now choose a journal site for each individual username that
+  you have, which is useful if you have accounts on multiple sites.
+
+Fixes and Improvements:
+
+- Charm will prompt you for a password if you've chosen a username for
+  which it has no login or hlogin information in your .charmrc.
+
+- Network faults are better handled in operations that depend on XML-RPC.
+
+- The view journal feature now also works for sites other than LiveJournal.
+
+- Default security settings from .charmrc are properly restored when 
+  starting a new post after posting or editing another entry.
+
+- When writing an archive, the item ID and the post options (such as
+  preformat, nocomments, etc.) are now saved.
+
+- If a post has both a mood ID and mood text, save both of them when writing
+  an archive file. 
+
+- System error messages are displayed if available.
+
+- Some minor code cleanup.
+
+---------------------------------------------------------------------------
+
+November 9th, 2004 -- Charm 1.5.0
+
+Some of the changes in this version of Charm require a minimum Python
+version. If you don't have a sufficiently recent Python installation,
+Charm will use alternative methods, or notify you that a feature is
+not supported. The client should still run regardless.
+
+New features:
+
+- Administrative console commands are supported. You can now manage your
+  friends list, manage communities, manage posting access to shared
+  journals, and administrate bans from Charm. Utilizes the XML-RPC
+  client protocol, and thus requires at least Python 2.2.
+
+- XMMS-based music detection is now supported, via the PyXMMS module, which
+  can be obtained from http://www.via.ecp.fr/~flo/
+  There is a new configuration option, "autodetect", as well as the
+  command-line options -A, --autodetect, which turn on music auto-detection.
+  Music will be auto-detected at startup, and through each posting menu
+  iteration. If the current music is changed manually via the posting
+  menu, no further autodetection will be performed during that run of
+  the client.
+
+Fixes and Improvements:
+
+- Charm is now supports LJ client protocol version 1, and thus has some
+  limited support for Unicode posting. Requires at least Python 1.6.
+
+- Challenge/response authentication is now supported, and is used by
+  default. Cleartext authentication will continue to be used with older
+  LJ-based sites that do not support challenge/response.
+
+- The getpass module is now used to get passwords, so password entry is
+  no longer visible on-screen.
+
+- Fixed a cosmetic issue with extra space in prompts (affects Python 2.3).
+
+---------------------------------------------------------------------------
+
+December 22nd, 2003 -- Charm 1.4.0
+
+New features:
+
+- Allow music to be specified on the command line with -M or --music.
+
+- The various boolean options, like comments and backdating, can now
+  be specified from the command line. Help displayed by --options.
+
+Fixes and Improvements:
+
+- Using -q to read from stdin now works properly.
+
+- Fixed a crash bug with blank posts.
+
+- Number of posts per day archived now correctly printed.
+
+- distutils now installs charm as a script.
+
+- Minor code clean-up in various places.
+
+---------------------------------------------------------------------------
+
+January 29th, 2003 -- Charm 1.3.0
+
+New features:
+
+- You can now archive posts between arbitrary date ranges. This allows
+  you to mass-download parts or all of your journal.
+
+- There is now a quick mode, using the --quick command-line option.
+  This takes the post from stdin, and sends it, allowing you to pipe
+  the output of other programs into a post.
+
+- You can now check for friend updates from specific friend groups.  
+
+- Conf files now support the "include" statement, allowing you to have
+  multiple conf files (for different journal profiles, for instance) that
+  share some common options.
+
+- A new conf option, "url", allows you to change the URL of the server
+  interface, so you can use DeadJournal, uJournal, etc.
+
+- A new conf option, "commpic", allows you to specify your default user
+  picture when posting to a particular community.
+
+- You can now set the default security on your posts with the "security"
+  conf option, or the --permit command-line option.
+
+- You can now set the default journal/community to post to, using the
+  "journal" conf option, or the --journal command-line option. 
+
+- Edited posts can now be automatically timestamped with the time of editing,
+  if you enable the "edit_times" conf option.
+
+- When you pick the menu option to resume a draft, you now get a menu of
+  drafts in the draft directory.
+
+Fixes and Improvements:
+
+- Draft file resumption was not working unless --resume was the last
+  parameter specified on the command line. Fixed.
+
+- Conf file options were not preserved after a post/edit was finished and
+  another was begun. Fixed.
+
+- When viewing a calendar, single-digit months and days were inaccurately
+  showing a zero post count. Fixed.
+
+- Journals, picture keywords, and friend groups are now cached, so they're
+  accessible even if you're not logged in.
+
+- Some parts of the code have been cleaned up, and Charm now starts up more
+  quickly (mostly by moving the bulk of the code into a library file, thus
+  allowing Python to pre-compile it, making subsequent invocations much
+  faster). Rarely-used modules are no longer imported until we need them.
+
+- There is now a setup script, for those who want to install Charm as a
+  standard Python module.
+
+---------------------------------------------------------------------------
+
+January 27th, 2003 -- Charm 1.2.1
+
+Maintenance release:
+
+- Charm now runs on Python 1.5.2 (and likely other prior-to-2.0 versions),
+  as well as Python 2.0 and above.
+
+---------------------------------------------------------------------------
+
+January 2nd, 2003 -- Charm 1.2.0
+
+New features:
+
+- A polling mode for checking friend updates is now supported. (Similar
+  in display to the 'newmail' Unix utility, it can be run in the background.)
+
+- Friend group security is supported.
+
+- The new conf option 'show_permissions' (off by default) adds an optional
+  tagline to the top of non-public posts, such as "[ To my friends. ]"
+  The new 'groupheader' conf option sets the tag lines to add.
+
+- The opt_noemail post meta-data is now supported.
+
+- You can save a post to a file, formatted as if for archive.
+
+- The new conf option 'archive_overwrite' (off by default) will overwrite
+  the original archived post with the updated, edited one, when you edit
+  your post using Charm.
+
+- A new --login command-line option overrides the nologin conf parameter.
+
+Fixes:
+
+- Fixed a crash bug when trying to unlink a draft file when none exists.
+  (Occurred when using an editor like emacs that doesn't create zero-length
+  files.)
+
+- Gracefully handle failures of urlopen().
+
+- Correctly handle boolean options that defaulted to true.
+
+- When a subject is truncated for display, CR/NLs are converted to spaces.
+
+---------------------------------------------------------------------------
+
+December 23rd, 2001 -- Charm 1.1.0
+
+New features:
+
+- You now have the option to use an MD5 hashed password rather than a
+  plaintext password.
+
+- New conf parameters login/hlogin allow easy management of multiple
+  usernames.
+
+- Prompt interactively for username and password if not in .charmrc file.
+
+- checkfriends supported.
+
+- Added new conf param, archive_subdirs, which puts subdirectories under
+  the main archive dir for each journal.
+
+- Cache server mood data in ~/.charmcache file.
+
+Bugfixes:
+
+- Fixed non-existent draft file crashes (can happen as the result of
+  invoking an editor without writing anything).
+
+- The archive_dir param now properly understands ~username.
+
+- If the organization of the archive uses year, don't use year in the
+  filename; ditto month.
+
+- Graceful handling of KeyboardInterrupt and EOFError exceptions.
+
+- Cleaner for pydoc.
+
+---------------------------------------------------------------------------
+
+November 25th, 2001 -- Charm 1.0.1
+
+Initial release.

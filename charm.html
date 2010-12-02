@@ -1,0 +1,1648 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+          "http://www.w3.org/TR/html4/loose.dtd">
+<HTML>
+<HEAD>
+<SCRIPT type="text/javascript">
+function explink(e) {
+    if (document.getElementById(e).style.display == 'none') {
+        document.getElementById(e).style.display = 'block';
+    } else {
+        document.getElementById(e).style.display = 'none';
+    }
+}
+function hideall() {
+        var Nodes = document.getElementsByTagName('ul')
+        var max = Nodes.length
+        for(var i = 0;i < max;i++) {
+                var nodeObj = Nodes.item(i)
+		if (nodeObj.className == 'menu') {
+		        nodeObj.style.display = 'none';
+		}
+        }
+}
+</SCRIPT>
+<STYLE type="text/css">
+BODY {
+	background: #FFFFFF;
+	color: #000000;
+}
+H2 {
+	background: #EAECEF;
+	color: #000000;
+	font-size: 12pt;
+	text-align: center;
+}	
+H3 {
+        font-size: 12pt;
+}
+TT {
+	font-family: fixed;
+	color: #990000;
+}
+U {
+	color: #660099;
+	text-decoration: none;
+}
+TH {
+	background: #0000CC;
+	color: #FFFFFF;
+	font-size: 12pt;
+}
+TD {
+	font-size: 10pt;
+}
+UL.menu {
+	cursor: pointer;
+	text-align: left;
+	margin: 0 0 0 1em;
+	padding: 0;
+	list-style-type: none;
+}
+A.item { text-decoration: underline; cursor: pointer; }
+A:link { color: #0000FF; }
+A:visited { color: #000099; }
+A:active { color: #CCCCCC; }
+DIV#main {
+	font-size: 12pt;
+}
+</STYLE>
+<TITLE>Charm: a Python client for LiveJournal</TITLE>
+</HEAD>
+<BODY onload="hideall();">
+
+<TABLE WIDTH="100%" BORDER=0 CELLSPACING=5 CELLPADDING=5>
+
+<TR>
+
+<TD WIDTH="15%" VALIGN="top">
+<TABLE WIDTH="100%" BGCOLOR="#EAECEF" BORDER=0 CELLPADDING=2 CELLSPACING=2 ALIGN="center">
+<TR><TH>
+Contents
+</TH></TR>
+<TR><TD BGCOLOR="#EAECEF">
+
+<A CLASS="item" onclick="explink('m_install');">Installation</A>
+<UL CLASS="menu" ID="m_install">
+<LI><A HREF="#x_install_unix">Unix Install</A></LI>
+<LI><A HREF="#x_install_win">Windows Install</A></LI>
+</UL> <BR>
+
+<A HREF="#x_start">Getting Started</A> <BR>
+
+<A CLASS="item" onclick="explink('m_journals');">Users&nbsp;and&nbsp;Journals</A>
+<UL CLASS="menu" ID="m_journals">
+<LI><A HREF="#x_journals_userpass_lj">Logins: LiveJournal</A></LI>
+<LI><A HREF="#x_journals_userpass_atom">Logins: Blogger</A></LI>
+<LI> <A HREF="#x_journals_userpass_metaweb">Logins: MetaWeb</A></LI>
+<LI><A HREF="#x_journals_multi">Multiple Users</A></LI>
+<LI><A HREF="#x_journals_site">Multiple Sites</A></LI>
+<LI><A HREF="#x_journals_def">Default Journal</A></LI>
+<LI><A HREF="#x_journals_conf">Multiple Configs</A></LI>
+</UL> <BR>
+
+<A HREF="#x_checkfriends">CheckFriends</A> <BR>
+
+<A CLASS="item" onclick="explink('m_dl');">Journal&nbsp;Downloads</A>
+<UL CLASS="menu" ID="m_dl">
+<LI><A HREF="#x_dl_backup">Offline&nbsp;Backup</A></LI>
+<LI><A HREF="#x_dl_part">Partial&nbsp;Download</A></LI>
+<LI><A HREF="#x_dl_dir">Archive&nbsp;Directory</A></LI>
+<LI><A HREF="#x_dl_org">Archive&nbsp;Organization</A></LI>
+</UL> <BR>
+
+<A HREF="#x_quick">Quick Posting</A> <BR>
+<A HREF="#x_login">Logging In</A> <BR>
+
+<A CLASS="item" onclick="explink('m_post');">Interactive&nbsp;Posting</A>
+<UL CLASS="menu" ID="m_post">
+<LI><A HREF="#x_post_tags">Categories, Journals</A></LI>
+<LI><A HREF="#x_post_userpic">UserPics</A></LI>
+<LI><A HREF="#x_post_smm">Subject,&nbsp;Mood,&nbsp;Music</A></LI>
+<LI><A HREF="#x_post_opt">More Options</A></LI>
+<LI><A HREF="#x_post_sec_set">Setting Security</A></LI>
+<LI><A HREF="#x_post_set_show">Display Security</A></LI>
+<LI><A HREF="#x_post_write">Writing Your Post</A></LI>
+<LI><A HREF="#x_post_preview">Previewing&nbsp;Your&nbsp;Post</A></LI>
+<LI><A HREF="#x_post_spell">Spell-Checking</A></LI>
+<LI><A HREF="#x_post_filter">Applying&nbsp;Filters</A></LI>
+<LI><A HREF="#x_post_session">Save and Resume</A></LI>
+<LI><A HREF="#x_post_time">Post Time</A></LI>
+<LI><A HREF="#x_post_send">Sending Your Post</A></LI>
+<LI><A HREF="#x_post_template">Using Post Templates</A></LI>
+</UL> <BR>
+
+<A HREF="#x_editing">Editing</A> <BR>
+<A HREF="#x_archive">Auto-Archival</A> <BR>
+<A HREF="#x_xpost">Cross-Posting</A> <BR>
+
+<A CLASS="item" onclick="explink('m_friends');">Friends</A>
+<UL CLASS="menu" ID="m_friends">
+<LI><A HREF="#x_friends_list">List Friends</A></LI>
+<LI><A HREF="#x_friends_add">Add Friend</A></LI>
+<LI><A HREF="#x_friends_sub">Remove Friend</A></LI>
+<LI><A HREF="#x_friends_edit">Edit Friend</A></LI>
+</UL> <BR>
+
+<A CLASS="item" onclick="explink('m_groups');">Friend Groups</A>
+<UL CLASS="menu" ID="m_groups">
+<LI><A HREF="#x_groups_list">List Groups</A></LI>
+<LI><A HREF="#x_groups_add">Add Group</A></LI>
+<LI><A HREF="#x_groups_sub">Remove Group</A></LI>
+<LI><A HREF="#x_groups_edit">Edit Group</A></LI>
+</UL> <BR>
+
+<A HREF="#x_bans">Banned Users</A> <BR>
+
+<A CLASS="item" onclick="explink('m_comm');">Memberships</A>
+<UL CLASS="menu" ID="m_comm">
+<LI><A HREF="#x_comm_comm">Communities</A></LI>
+<LI><A HREF="#x_comm_shared">Shared Journals</A></LI>
+</UL> <BR>
+
+<A HREF="#x_other">Other&nbsp;Features</A> <BR>
+<A HREF="#x_help">Getting&nbsp;Help</A>
+</TD></TR>
+</TABLE>
+</TD>
+
+<TD WIDTH="85%" VALIGN="TOP">
+<TABLE WIDTH="100%" BORDER=0 CELLPADDING=2 CELLSPACING=2 ALIGN="center">
+<TR><TH>The Charm Manual</TH></TR>
+<TR><TD><DIV ID="main">
+
+Charm is a client for journaling and blogging. It supports:
+<P>
+
+<UL>
+<LI> LiveJournal and LiveJournal-based sites, such as DeadJournal.
+<LI> Atom API-based sites, such as Blogger and Movable Type.
+<LI> MetaWeb API-based sites, such as those that utilize WordPress.
+</UL>
+
+Charm is written in Python, which means that it runs on a very
+wide variety of platforms. It is entirely text-based, and can be used
+either to post directly from the command line, or via interactive text
+menus.
+<P>
+
+Charm is an open-source program licensed under the GNU General Public
+License (GPL).  This means that Charm is free to use and
+distribute. If you modify the source code in some useful way, please
+let the author know, so that your changes can be incorporated into the
+next Charm release.
+<P> 
+
+<A NAME="x_install"><H2>Installation</H2></A>
+<P>
+
+Charm runs on Unix systems (Linux, Solaris, the MacOS X Terminal, etc.),
+as well as Windows. A variety of other operating systems also support
+Python; follow the Unix installation instructions for these.
+<P>
+
+<A NAME="x_install_unix"><H3>Installing Charm on a Unix System</H3></A>
+
+You can simply run Charm out of the directory that you unpacked it into,
+by typing <TT>charm</TT> (assuming that it's in your path).
+<P>
+
+If you'd like to install Charm system-wide, so that any user can use it,
+you'll need:
+<P>
+
+<OL>
+<LI> Access to root, in order to do the installation.
+<LI> Python version 1.6 or later, or the Distutils module.
+</OL>
+
+To install Charm system-wide, do the following:
+<P>
+
+<OL>
+<LI> Become root.
+<LI> In the Charm directory, type: <TT>python setup.py install</TT>
+</OL>
+
+Once you install Charm system-wide, any user can use Charm by typing
+<TT>charm</TT> (assuming the program is in his path).
+<P>
+
+<A NAME="x_install_win"><H3>Installing Charm on a Windows System</H3></A>
+
+To install Charm for personal use on your Windows PC, do the following:
+<P>
+
+<OL>
+<LI> Rename the <U>charm</U> program to <U>charm.py</U> (this is
+     necessary in order to get Windows to recognize it as a Python script).
+<P>
+<LI> Create a batchfile with the following lines: <P>
+     <TT>
+     set HOME=C:\DOCUME~1\<I>YOUR_WINDOWS_LOGIN_NAME</I> <BR>
+     set EDITOR=notepad <BR>
+     charm.py
+     </TT>
+     <P>
+     Replace <I>YOUR_WINDOWS_LOGIN_NAME</I> with whatever your Windows
+     login name is. You can also optionally replace "notepad" with
+     the name of your favorite editor.
+</OL>
+<P>
+
+In order to run Charm interactively, run the batchfile. Otherwise, you
+can invoke <TT>charm.py</TT> directly. Make sure Python is in your
+Windows path.
+<P>
+
+<A NAME="x_start"><H2>Getting Started</H2></A>
+
+Once you have Charm installed, you will need to create a minimal
+<U>.charmrc</U> file. That file must go in your home directory.
+<P>
+
+For Unix users, your home directory can be found by typing
+<TT>echo $HOME</TT> -- it's normally the directory that you're
+placed into when you log into the system.
+<P>
+
+For Windows users, your home directory is normally: <BR> 
+<U>C:\Documents and Settings\<I>YOUR_WINDOWS_LOGIN_NAME</I></U>
+<P>
+
+A minimal <U>.charmrc</U> file consists of just one line: <BR>
+<TT>login = <I>Your_Journal_Username</I> <I>Your_Journal_Password</I></TT>
+<BR>
+(Fill in your LiveJournal or other LJ-site username and password for
+<I>Your_Journal_Username</I> and <I>Your_Journal_Password</I>.)
+<P>
+
+There are a large number of other configuration parameters that you can
+put in your <U>.charmrc</U>; the <U>sample.charmrc</U> file that's
+included with the distribution shows you all of them. We'll explore the
+possibilities later on, including a way to avoid placing your cleartext
+password in your <U>.charmrc</U> file.
+<P>
+
+If you ever need a quick reminder of what Charm can do, type
+<TT>charm -h</TT> or <TT>charm --help</TT> <BR>
+This will show you all of the basic command-line options available
+for Charm. (Additional options used for posting are shown with
+<TT>charm -o</TT> or <TT>charm --options</TT>) 
+<P>
+
+Most options in Charm have a short, one-letter form, and a verbose
+word form. You can use either; there's no difference between them.
+This documentation always uses the one-letter form, when available.
+<P>
+
+<A NAME="x_journals"><H2>Users and Journals</H2></A>
+
+You can store your usernames and passwords in your <U>.charmrc</U>, so
+you don't have to type them every time you start Charm. Furthermore,
+Charm can handle multiple usernames, journals, journal sites, and
+configuration files.
+<P>
+
+<A NAME="x_journals_userpass_lj"><H3>Specifying Login Information: Sites Using the LiveJournal Protocol</H3></A>
+
+If you are using LiveJournal or a LiveJournal-based site, you
+can specify login information -- the username that you use for journal
+activities -- in your <U>.charmrc</U> in one of two ways. The first is
+the <U>login</U> configuration parameter; the other is the
+<U>hlogin</U> configuration parameter.
+<P>
+
+The format of <U>login</U> is very simple: <BR>
+<TT>login = <I>username</I> <I>password</I></TT> <BR>
+where <I>username</I> is your journal username, and <I>password</I> is
+your journal password.
+<P>
+
+However, using <U>login</U> means that you're putting your password, in
+cleartext, in a file. That's not very secure. So, instead, if you can,
+you should find your "hash password", by doing the following:
+<P>
+
+<OL>
+<LI> Start Python. (Just typing <TT>python</TT> in Unix, or clicking
+     the Python icon in Windows, should work.)
+<P>
+<LI> Type <TT>import ljcharm</TT>
+<P>
+<LI> Type <TT>ljcharm.md5digest("<I>password</I>")</TT> (where
+     <I>password</I> is your journal password). You should get back
+     a string of characters between two single quote marks, like
+     'a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5'.
+<P>
+<LI> Your hash password is the string of characters between the single
+     quote marks.
+</OL>
+<P>
+
+Once you've found your hash password, you can put this in your
+<U>.charmrc</U> file: <BR>
+<TT>hlogin = <I>username</I> <I>hash</I></TT> <BR>
+where <I>username</I> is your journal username, and <I>hash</I> is your
+hash password.
+<P>
+
+<A NAME="x_journals_userpass_atom"><H3>Specifying Login Information: Blogger and other Atom API Sites</H3></A>
+
+If you are using Blogger or another Atom API-based blogging site, you
+can specify login information -- the username that you use for blog
+activities -- in your <U>.charmrc</U> in one of two ways. The first is
+the <U>atomblog</U> configuration parameter; the other is the
+<U>hatomblog</U> configuration parameter.
+<P>
+
+The format of the <U>atomblog</U> configuration parameter is very simple: <BR>
+<TT>atomblog = <I>username</I> <I>password</I> <I>URIpath</I></TT> <BR>
+where <I>username</I> is your blog username, <I>password</I> is
+your blog password, and <I>URIpath</I> is the root URL for feed
+discovery for your blog. <I>URIpath</I> is optional; Blogger, with a
+root of <U>https://www.blogger.com/atom/</U>, is the default. If
+you're using something other than Blogger, you'll need to specify
+<I>URIpath</I>.
+<P>
+
+For example: <BR>
+<TT>atomblog = test testpw http://www.typepad.com/t/atom/weblog</TT><BR>
+is the appropriate login for user <U>test</U> with password <U>testpw</U>
+on Typepad.
+<P>
+
+Using the <U>atomblog</U> configuration parameter means that
+you're putting your password, in cleartext, in a file. That's not very
+secure. If your blog site doesn't use WSSE, you should instead find
+your "hash password", by doing the following:
+<P>
+
+<OL>
+<LI> Start Python. (Just typing <TT>python</TT> in Unix, or clicking
+     the Python icon in Windows, should work.)
+<P>
+<LI> Type <TT>import base64</TT>
+<P>
+<LI> Type <TT>base64.encodestring("<I>username</I>:<I>password</I>")[:-1]</TT>
+     (where <I>username</I> is your blog username and <I>password</I> is
+     your blog site password, and note that the two are separated by a
+     colon). You should get back a string of characters
+     between two single quote marks, like 'dGVzdDp0ZXN0'.
+<P>
+<LI> Your hash password is the string of characters between the single
+     quote marks.
+</OL>
+<P>
+
+Once you've found your hash password, you can put this in your
+<U>.charmrc</U> file: <BR>
+<TT>hatomblog = <I>username</I> <I>hash</I> <I>URIpath</I></TT> <BR>
+where <I>username</I> is your journal username, <I>hash</I> is your
+hash password, and <I>URIpath</I> is the root URL for feed discovery.
+<P>
+
+With either <U>atomblog</U> or <U>hatomblog</U> specified,
+Charm will assume that it should use basic authentication over SSL
+if <I>URIpath</I> designates the <U>https</U> protocol; otherwise it
+will use WSSE authentication over regular HTTP. Blogger, for instance,
+supports the former, while Movable Type (Typepad) supports the latter.
+Charm will also try falling back to basic authentication over non-SSL
+if SSL fails, or falling back to WSSE authentication over SSL if
+regular HTTP fails. In other words, the protocol you specify in
+<I>URIpath</I> really matters for determining basic authentication
+vs. WSSE, more than it does whether SSL is used or not.
+<P>
+
+<A NAME="x_journals_userpass_metaweb"><H3>Specifying Login Information: MetaWeb API Sites</H3></A>
+
+If you are using a blogging site that uses the MetaWeb API, such as a site
+that is powered by WordPress, you can specify login information -- the
+username that you use for blog activities -- in your <U>.charmrc</U> 
+by using the <U>metaweb</U> configuration parameter.
+<P>
+
+The format of the <U>metaweb</U> configuration parameter is as follows: <BR>
+<TT>metaweb = <I>username</I> <I>password</I> <I>URIpath</I></TT> <BR>
+where <I>username</I> is your blog username, <I>password</I> is
+your blog password, and <I>URIpath</I> is the URL of the XML-RPC
+MetaWeb interface for your blog.
+<P>
+
+For example: <BR>
+<TT>metaweb = test testpw http://testuser.wordpress.com/xmlrpc.php</TT><BR>
+is the appropriate login for user <U>test</U> with password <U>testpw</U>
+on wordpress.com.
+<P>
+
+<A NAME="x_journals_multi"><H3>Handling Multiple Usernames</H3></A>
+
+You can post under a variety of different usernames, using Charm.
+If you've specified multiple <U>login</U>, <U>hlogin</U>, <U>atomblog</U>
+<U>hatomblog</U>, and <U>metaweb</U> parameters in your
+<U>.charmrc</U>&nbsp;--&nbsp;because,
+for instance, you have multiple journal accounts&nbsp;--&nbsp;you can
+specify which one to use by default by adding the following line to
+your <U>.charmrc</U>: <BR>
+<TT>default_user = <I>username</I></TT>
+<P>
+
+When you start Charm, it reads your <U>.charmrc</U> file, and tries to
+figure out what journal user you'd like to be, checking sequentially as
+follows (i.e., things later in the list aren't checked unless things
+earlier in the list haven't yielded a user):
+<P>
+
+<OL>
+<LI> If you don't have a <U>login</U>, <U>hlogin</U>, <U>atomblog</U>,
+     <U>hatomblog</U>, or <U>metaweb</U> parameter in your <U>.charmrc</U>,
+     it will prompt you for a LiveJournal username and password.
+<P>
+<LI> If you specify the command-line option <TT>-u <I>username</I></TT>,
+     it will use that username. If there's no corresponding <U>login</U>,
+     <U>hlogin</U>, <U>atomblog</U>, <U>hatomblog</U>, or <U>metaweb</U> in
+     your <U>.charmrc</U>, you will be prompted for a password.
+<P>
+<LI> If you have the <U>default_user</U> configuration parameter in your
+     <U>.charmrc</U>, it will use that username. If there's no corresponding
+     <U>login</U>, <U>hlogin</U>, <U>atomblog</U>, <U>hatomblog</U>, or
+     <U>metaweb</U> in your <U>.charmrc</U>, you will be prompted for a
+     password.
+<P>
+<LI> If you only have a single <U>login</U>, <U>hlogin</U>, <U>atomblog</U>,
+     <U>hatomblog</U>, or <U>metaweb</U> in your <U>.charmc</U>, it will
+     use that username.
+<P>
+<LI> If you have multiple <U>login</U>, <U>hlogin</U>, <U>atomblog</U>,
+     <U>hatomblog</U>, or <U>metaweb</U> parameters in your <U>.charmrc</U>,
+     it will ask you which one you want to use.
+</OL>
+<P>
+
+<A NAME="x_journals_site"><H3>Handling Different LiveJournal-Based Sites</H3></A>
+
+By default, Charm utilizes LiveJournal. However, you can use Charm with
+any journal site that supports the LJ protcol, such as DeadJournal or
+Blurty, as well as any blogging site that supports the Atom API, such
+as Blogger, or that supports the MetaWeb API, such as WordPress-based
+sites. (Configuring multiple blogs was described in a previous section.)
+<P>
+
+If you primarily use a LiveJournal-based site other than LiveJournal, put
+the following line in your <U>.charmrc</U>: <BR>
+<TT>url = http://<I>journalsite</I>/interface/flat</TT> <BR>
+where <I>journalsite</I> is the site's hostname, such as
+<U>www.deadjournal.com</U> or <U>www.blurty.com</U>.
+<P>
+
+If you use a mixture of LiveJournal-based sites, you can specify which
+site to use with a given login name, by providing a third parameter to the 
+<U>login</U> or <U>hlogin</U> configuration options. This third parameter
+is the hostname of the site. In the case of LiveJournal, this is
+<U>www.livejournal.com</U>; DeadJournal is <U>www.deadjournal.com</U>,
+Blurty is <U>www.blurty.com</U>, and so forth. This will look
+as follows: <BR>
+<TT>login = <I>username</I> <I>password</I> <I>site</I></TT> <BR>
+<TT>hlogin = <I>username</I> <I>hash</I> <I>site</I></TT> <BR>
+<P>
+
+For example: <BR>
+<TT>login = test test www.livejournal.com</TT> <BR>
+is the appropriate login for user <U>test</U> with password <U>test</U>
+on LiveJournal.
+<P>
+
+<A NAME="x_journals_def"><H3>Posting to Some Other Journal by Default</H3></A>
+
+By default, Charm operates on the journal that's associated with your 
+username. However, some people primarily post to a community or to a
+shared journal and would prefer if Charm defaulted to using that by
+default. (If you're posting to a community or shared journal, you're
+still doing so under your own username -- the post's just going somewhere
+different.)
+<P>
+
+If you're one of those people, you may find it useful to specify the
+following in your <U>.charmrc</U>: <BR>
+<TT>journal = <I>journalname</I></TT> <BR>
+where <I>journalname</I> is the name of the community or shared journal.
+<P>
+
+This configuration option is only for LiveJournal-based sites.  If you
+have multiple blogs under one Atom or MetaWeb API account, you will
+always be prompted for which blog you want to work with when you start
+Charm with that blog username.
+<P>
+
+<A NAME="x_journals_conf"><H3>Using Multiple Configuration Files</H3></A>
+
+You can start Charm with the <TT>-f <I>filename</I></TT> command-line
+option, where <I>filename</I> is the name of a configuration file to read.
+This file will be read instead of the <U>.charmrc</U> file.
+<P>
+
+Configuration files can include other configuration files, with: <BR>
+<TT>include <I>filename</I></TT> <BR>
+where <I>filename</I> is the name of the additional configuration file to
+read.
+<P>
+
+Nested configuration files of this type are particularly useful if you have
+different configurations for different usernames, particularly if those
+usernames are spread across several diferent journal sites. You can place
+the configuration parameters common to all of your usernames into one file,
+and then, for the special cases, have separate files that include that file.
+<P>
+
+<A NAME="x_checkfriends"><H2>CheckFriends: Checking Whether Friends Have Posted New Entries</H2></A>
+
+Charm can run in a background mode that will let you know when your friends
+have posted new journal entries. When there are new posts, you'll see the
+message: <BR>
+<CENTER><U>&gt;&gt; You have new LiveJournal friend updates. &lt;&lt;</U></CENTER>
+<P>
+
+Unix users: Invoke Charm in checkfriends mode by typing <TT>charm -c -i 15 &amp;</TT> <BR>
+Charm will run as a background job (this is what the ampersand does),
+and you can continue to work in that terminal window. The new-updates
+message will be displayed in that window. (If you're a Unix user, for
+the rest of the examples in this section, always add the <TT>&</TT>
+to the end of any <TT>charm -c</TT> command.)
+<P>
+
+All other users: Invoke Charm in checkfriends mode by typing <TT>charm -c -i 15</TT> <BR>
+Charm will run in a window of its own, and the new-updates message will
+be displayed in that window.
+<P>
+
+You can replace the 15 with the number of minutes that you want Charm
+to wait between each check (the "polling interval"). In order to avoid
+burdening the journal site's servers, it is strongly suggested that
+you don't use a value below 5.
+<P>
+
+By default, Charm checks to see if any of your friends have posted entries.
+You can restrict this check to just some of your friend groups, however,
+by specifying a command-line option, <TT>-g&nbsp;<I>FRIENDGROUP</I></TT>.
+You can specify this command-line option as many times as you want.
+For instance, if you want to check only your friend groups BestBuddies,
+Interesting, and Outcasts, you would do this: <BR>
+<TT>charm -c -i 15 -g BestBuddies -g Interesting -g Outcasts</TT>
+<P>
+
+To avoid having to specify <TT>-i <I>minutes</I></TT> or 
+<TT>-g <I>group</I></TT> on the command line, you can put the
+options you want in your <U>.charmrc</U> file. 
+<P>
+
+To have Charm automatically use a specific polling interval, put the
+following line in your <U>.charmrc</U>: <BR>
+<TT>checkdelay = 30</TT> <BR>
+(Replace 30 with whatever you want the polling interval to be.)
+<P>
+
+To have Charm automatically check only a specific set of friend groups,
+put this line in your <U>.charmrc</U>: <BR>
+<TT>checkgroups = <I>Group1</I>,<I>Group2</I>,<I>Group3</I></TT> <BR>
+(Substitute a list of the friend groups that you want to check, with the
+group names separated by commas, in place of <I>Group1</I> through 
+<I>Group3</I>. You can list as many or as few friend groups as you want.)
+<P>
+
+<A NAME="x_dl"><H2>Journal Downloads</H2></A>
+
+You can download some or all of your journal entries from within Charm.
+This is useful if you want to create an offline mirror or backup of your
+journal.
+<P>
+
+<A NAME="x_dl_backup"><H3>Creating an Offline Backup of Your Entire Journal</H3></A>
+
+Type <TT>charm -z</TT> to run a synchronization for the first time.
+This will download all of your entries and save them to your disk. The
+entries will be written to your archive directory.
+<P>
+
+In the future, you can type <TT>charm -z</TT> to update the
+synchronization of your journal. This will download all the entries
+that you have posted or edited since the last time you ran a
+synchronization.
+<P>
+
+This feature is particularly handy if you are on a Unix system, and
+you want to back up your journal nightly; you can just create a crontab
+entry that runs <TT>charm -z</TT> once per day.
+<P>
+
+You can also run a synchronization directly within Charm; to do so,
+start Charm, then select "<TT>A</TT>" (archive past journal entries)
+from the main menu, then "<TT>A</TT>" again to run the archive.
+<P>
+
+<A NAME="x_dl_part"><H3>Downloading Part of Your Journal</H3></A>
+
+Charm can download and save journal entries that are dated between two
+specified dates. The entries are written to your archive directory.
+<P>
+
+Start Charm, then select "<TT>a</TT>" (archive past journal entries).
+Then, select "<TT>s</TT>" and enter the date of the first entry that
+you want to download. If the last day you want to archive isn't today,
+you should next select "<TT>e</TT>", and enter the last date that you
+want entries from.
+<P>
+
+Select "<TT>a</TT>" to run the archive. Charm will download all entries
+that are dated between the start date and the end date, inclusively. It
+will go month-by-month, and then day-by-day within each month.
+<P>
+
+This type of archival is less efficient than using Charm's synchronization
+capabilties. It is best used when you don't want your entire journal, but
+a much narrower range of posts, such as a period of several weeks.
+<P>
+
+<A NAME="x_dl_dir"><H3>Archive Options: Archive Directory Location</H3></A>
+
+By default, posts are saved to the <U>.ljarchive</U> directory beneath
+your home directory. There are three ways to change this, so you can
+save the archived posts to any place on your system:
+<P>
+
+<OL>
+<LI> Use a command-line option, <TT>-a <I>directory</I></TT> (where
+     <I>directory</I> is the pathname of the directory you want to use). 
+<P>
+<LI> Add a line to your <U>.charmrc</U> file, like so: <BR>
+     <TT>archive_dir = <I>directory</I></TT> <BR>
+     (Substitute the directory path you want to use for <I>directory</I>.
+     Unix users can use <U>~ </U> as shorthand for their home
+     directory, i.e., the default is <U>~/.ljarchive</U>)
+<P>
+<LI> Change it in the archive menu from within Charm, via the 
+     "<TT>d</TT>" selection.
+</OL>
+<P>
+
+<A NAME="x_dl_org"><H3>Archive Options: Archive Directory Organization</H3></A>
+
+There are three ways that your archive directory can be organized. They are:
+<P>
+
+<OL>
+<LI> <U>none</U>. Put all posts in the archive directory, without
+     any subdirectories. Posts will be named <U><I>YYYYMMDD_hhmm</I></U>,
+     where <I>YYYY</I> is the year, <I>MM</I> is the month number,
+     <I>DD</I> is the day, <I>hh</I> is the hour, and <I>mm</I> is the
+     minute of the post's date.
+<P>
+<LI> <U>year</U>. The posts go in the archive directory, with a
+     subdirectory for each year. Posts will be named <U><I>MMDD_hhmm</I></U>.
+<P>
+<LI> <U>month</U>. The posts go in the archive directory, with a
+     subdirectory for each year, and subdirectories for each month within
+     each year's subdirectory. Posts will be named <U><I>DD_hhmm</I></U>.
+</OL>
+<P>
+
+The default is <U>month</U>. You can change this in two ways:
+<P>
+
+<OL>
+<LI> Add a line to your <U>.charmrc</U> file, like so: <BR>
+     <TT>organize = <I>type</I></TT> <BR>
+     (Substitute <U>none</U>, <U>year</U>, or <U>month</U> for
+     <I>type</I>.)
+<P>
+<LI> Change it in the archive menu from within Charm, via the 
+     "<TT>o</TT>" selection.
+</OL>
+<P>
+
+<A NAME="x_quick"><H2>Quick Posting</H2></A>
+
+You can post, using Charm, from the command line. This is useful for
+making quick posts, and for using Charm as a filter (piping the output
+of some other program to Charm for posting).
+<P>
+
+Quick posting reads the journal text to post from standard input (stdin).
+If you're not piping the output of some other program to Charm, that means
+that you'll be presented with a blank line after invoking Charm in quick
+mode by using <TT>charm -q</TT>; type all the text that you want to
+post, and then press control-d to send the post.
+<P>
+
+Unix users: If you've got your post written up in a text file and want to
+send it quickly, you can type: <BR>
+<TT>cat <I>textfilename</I> | charm -q</TT> <BR>
+to do a quick post (replace <I>textfilename</I> with the name of the
+text file that holds your post). You can replace the part before the
+pipe (the "|") with any command; for instance, if you've got a filter
+that writes to stdout, you can pipe its output directly to Charm.
+<P>
+
+By specifying additional parameters on the command line, you can add
+various bits of content to your post, as follows:
+<P>
+
+<UL>
+<LI> <TT>-s <I>subject</I></TT>. Specifies the subject line for the post.
+<P>
+<LI> <TT>-m <I>mood</I></TT>. Specifies the mood for the post.
+<P>
+<LI> <TT>-k <I>picture_keyword</I></TT>. Specifies the userpic to use
+     for the post.
+<P>
+<LI> <TT>-p <I>permission</I></TT>. Specifies the security permission
+     for the post, which can be <U>public</U>, <U>friends</U>,
+     <U>private</U>, or the name of a friends group.
+<P>
+<LI> <TT>-M <I>music</I></TT>. Specifies the music for the post.     
+<P>
+<LI> <TT>-A</TT>. Auto-detect what music is playing, and use that as
+     the music for the post. (Cannot be used with -M, for obvious reasons.)
+</UL>
+<P>
+
+You can also specify other ways to treat your post, via the command line.
+All of these options have a <I>state</I> which can be <U>on</U> or
+<U>off</U>.
+<P>
+
+<UL>
+<LI> <TT>--autoformat=<I>state</I></TT>. If on, specifies that you're
+     formatting this post yourself (doing your own HTML).
+<P>
+<LI> <TT>--backdate=<I>state</I></TT>. If on, backdate this post.
+<P>
+<LI> <TT>--comments=<I>state</I></TT>. If off, don't allow comments
+     on this post.
+<P>
+<LI> <TT>--noemail=<I>state</I></TT>. If off, don't email comments
+    on this post to you. 
+</UL>
+<P>
+
+You can get a list of all command-line posting options supported by
+Charm by typing <TT>charm -o</TT>
+<P>
+
+Currently, quick posting to blogs via the Atom and MetaWeb APIs is
+only supported for usernames that have a single associated blog. If
+you have multiple blogs under the same site and username, you won't be
+able to quick post to them.
+<P>
+
+<A NAME="x_login"><H2>Logging In</H2></A>
+
+By default, when you start Charm in interactive mode for a
+LiveJournal-based site, it will try to log you in. This will display a
+banner welcome message, and download your userpic keywords and the
+server's list of moods. Also, if you are a paid user, this will enable
+you to use the fast servers for future transactions during this run of
+Charm.
+<P>
+
+You can turn this off by putting the following in your <U>.charmrc</U>: <BR>
+<TT>nologin = yes</TT>
+<P>
+
+You can also force logging in, regardless of what's in your <U>.charmrc</U>,
+by specifying the <TT>-l</TT> command-line option.
+<P>
+
+Similarly, you can force skipping the login, regardless of what's in
+your <U>.charmrc</U>, by specifying the <TT>-n</TT> command-line
+option.
+<P>
+
+Not logging in at startup is useful, if you want to save a little bit of
+start-up time (there's a brief delay while waiting for the journal server
+to respond), you're not connected to the network, or you don't plan to
+do anything in Charm that requires logging in. There's never any harm
+in not logging in -- if Charm needs data that it would normally get from
+a login, it will perform the necessary operations automatically.
+<P>
+
+If you didn't log in when you started Charm (or there was a server that
+prevented you from logging in), you can select "<TT>l</TT>" from the
+main menu in order to log in.
+<P>
+
+If you start Charm using a blog username rather than a LiveJournal one,
+Charm will always do the equivalent of logging you in -- it'll attempt
+to authenticate and download the list of your blogs. You can't turn
+this off because Charm needs that data before you can perform any
+operations.
+<P>
+
+<A NAME="x_post"><H2>Interactive Posting</H2></A>
+
+To begin posting a new journal entry, start Charm, and then select
+"<TT>p</TT>" (post a journal entry) from the main menu. You'll
+be taking to the post menu, where you can edit your post and change
+its metadata properties (like its security level, mood, and so forth).
+<P>
+
+<A NAME="x_post_tags">Category Tags and Journals</H3></A>
+
+When you use a LiveJournal-based site, you can pick one or more tags
+to be associated with your post by selecting "<TT>c</TT>" from the
+post menu. You can choose as many tags as you'd like. The tags you've
+used in the past are stored in Charm's cache file, as there's currently
+no way to retrieve them directly via the LiveJournal protocol; if you
+sometimes add tags via other clients or via the Web, Charm won't know
+about them (but you can just add them, and they'll work fine).
+<P>
+
+When you use an Atom API-based blog that has support for putting a post
+in a category, like Movable Type, you can choose a category for your post
+by selecting "<TT>c</TT>" from the post menu. You can only choose one
+category. Categories have to be defined on your blogging site before
+you can use them in Charm.
+<P>
+
+When you use a MetaWeb API-based blog, you can choose categories for
+your post by selecting "<TT>c</TT>" from the post menu. Categories
+have to be defined on your blogging site before you can use them in
+Charm (MetaWeb-based sites ignore categories in posts if they haven't
+been previously defined).
+<P>
+
+When using a LiveJournal-based site, by default, you'll post to the
+journal associated with your username (or with the <U>journal</U>
+configuration parameter).  If you'd like this post to go to a
+community or shared journal, select "<TT>j</TT>" (change journal to
+post in) from the post menu.
+<P>
+
+<A NAME="x_post_userpic"><H3>Journals and UserPics</H3></A>
+
+Choosing "<TT>k</TT>" from the post menu will allow you to choose one
+of your userpics; you will get a menu of your picture keywords, as
+retrieved from the server.
+<P>
+
+You can automatically set the userpic that you want to default to
+when you post to a community or shared journal, by putting the
+following in your <U>.charmrc</U>: <BR>
+<TT>commpic = <I>journal</I>,<I>userpic</I></TT> <BR>
+where <I>journal</I> is the name of the community or shared
+journal, and <I>userpic</I> is the picture keyword you want to
+associate to it. If you haven't selected explicitly selected some
+other userpic, Charm will automatically choose that
+one by default for that journal; you can still override it by
+selecting "<TT>k</TT>" afterwards.
+<P>
+
+You can have multiple <U>commpic</U> directives in your
+<U>.charmrc</U> -- one for every community and shared journal you post
+to, if you'd like. When you have <U>commpic</U> directives set, when you
+pick a journal from the journal selection menu, it will tell you what
+picture will be set by default for that choice.
+<P>
+
+You can also automatically set the userpic that you want to default to
+when you give a particular tag to a post, by putting the following
+in your <U>.charmrc</U>: <BR>
+<TT>tagpic = <I>tag</I>,<I>userpic</I></TT> <BR>
+where <I>tag</I> is the name of the tag, and <I>userpic</I> is the
+picture keyword you want to associate with it. If you haven't
+explicitly selected some other userpic, Charm will automatically
+choose that one by default when you set the tag. You can still
+override it by selecting "<TT>k</TT>" afterwards.
+<P>
+
+You can have multiple <U>tagpic</U> directives in your <U>.charmrc</U> --
+one for every tag that you have, if you'd like. (It's possible to
+defined tagpics for tags that you don't have yet, too, but of course
+they won't do anything.)  When you have <U>tagpic</U> directives set,
+when you pick tags from the tag selection menu, it will tell you which
+picture each tag corresponds to.
+<P>
+
+<A NAME="x_post_smm"><H3>Subject, Mood, and Music</H3></A>
+
+Choosing "<TT>s</TT>" from the post menu will let you change the subject
+line of your post.
+<P>
+
+Choosing "<TT>m</TT>" from the post menu will let you choose a mood
+for your post. This will give you a sub-menu. You can choose
+"<TT>n</TT>" for no mood, "<TT>l</TT>" to pick a mood from the
+server's list of pre-defined moods (which usually have moodtheme icons
+associated with them), or "<TT>o</TT>" to enter whatever mood text you
+want.
+<P>
+
+Choosing "<TT>a</TT>" from the post menu will allow you to type in
+whatever you want for "current music" for your post. If you want
+Charm to automatically figure out what music you are listening to,
+you can supply the <TT>-A</TT> command-line option; to always do
+this, add this line to your <U>.charmrc</U>: <BR>
+<TT>autodetect = yes</TT> <BR>
+If you have auto-detection turned on, and you use the "<TT>a</TT>"
+menu option to enter your own music title, auto-detection will
+be turned off for this run of Charm.
+<P>
+
+<A NAME="x_post_opt"><H3>Comments, Auto-Formatting, and Backdating</H3></A>
+
+The "<TT>o</TT>" (miscellaneous options) selection from the post menu
+will take you to a menu where you can change other aspects of your
+post. Note that in this menu the options, with the exception of
+comment screening, change things to the opposite of what they are --
+if you have comments allowed, then the option will read,
+<U>"Change comments option to: comments disallowed"</U>. You can change:
+<P>
+
+<UL>
+<LI> "<TT>a</TT>". Auto-formatting. If it's off, you'll need to write
+     your own HTML in the post.
+<P>
+<LI> "<TT>b</TT>". Backdating. Backdated posts don't show up in friends lists.
+<P>
+<LI> "<TT>c</TT>". Comments. If it's off, comments are not allowed.
+<P>
+<LI> "<TT>e</TT>". Email comments. If it's off, you won't receive email
+     when someone comments on your post.
+<P>
+<LI> "<TT>s</TT>". Screen comments. Screened comments are only visible to you
+     until you unscreen them. There are four possible options:
+  <UL TYPE="disc">
+  <LI> "<TT>n</TT>". Don't screen any comments.
+  <LI> "<TT>e</TT>". Screen comments posted by everyone (all comments).
+  <LI> "<TT>a</TT>". Only screen comments that have been posted anonymously.
+  <LI> "<TT>f</TT>". Sreen comments posted by users who aren't on your friends
+       list.
+  </UL>
+</UL>
+<P> 
+
+You can change all of these options but comment screening via command-line
+options. You can also set their default values from your <U>.charmrc</U>,
+as follows:
+<UL>
+<LI> Auto-formatting. <TT>autoformat = <I>state</I></TT>
+<LI> Backdating. <TT>backdate = <I>state</I></TT>
+<LI> Comments. <TT>comments = <I>state</I></TT>
+<LI> Email comments. <TT>noemail = <I>state</I></TT>
+</UL>
+where <I>state</I> is <U>on</U> or <U>off</U>. 
+<P>
+
+<A NAME="x_post_sec_set"><H3>Setting Security</H3></A>
+
+By default, the security level of your posts is public -- anyone who goes
+to the journal site can see it. You can change this default in your
+<U>.charmrc</U> with: <BR>
+<TT>security = <I>level</I></TT> <BR>
+where <I>level</I> is <U>public</U>, <U>private</U>, <U>friends</U>,
+or a list of friends groups whose names are separated by commas, such
+as <U>BestBuddies,SportsFans</U>.
+<P>
+
+You can change the security level of a specific post by providing the
+<TT>-p <I>level</I></TT> command-line option. <I>level</I> is the
+same as above. Make sure that if any friend group name has a space in
+it, that you enclose <I>level</I> in double-quotes. For instance: <BR>
+<TT>charm -p "BestBuddies,Interesting People,SportsFans"</TT>.
+<P> 
+
+You can also change the security level of a specific post by selecting
+"<TT>p</TT>" from the post menu. You'll be given four choices:
+<UL>
+<LI> "<TT>d</TT>". Set the security level to public (the server's default).
+<LI> "<TT>p</TT>". Make the post readable only by you.
+<LI> "<TT>f</TT>". Make the post readable only by people on your friends list.
+<LI> "<TT>c</TT>". Custom security (use friends groups).
+</UL>
+If you select custom security, you'll be shown a list of your friends groups.
+You can select which friends groups can read your post, by typing in a list
+of the group numbers.
+<P>
+
+<A NAME="x_post_sec_show"><H3>Displaying Security</H3></A>
+
+Normally, when your post shows up on the server, the only indication that
+a user gets that the post isn't public to everyone is a lock icon or the like.
+They don't know how private the post is -- whether it's visible to all your
+friends, visible to only a smaller group of friends, etc. Some users may
+simply not notice that the post is private. Thus, it's useful to make it
+very clear that a post isn't public, and tell your readers how private it is.
+<P>
+
+Charm supports a <U>.charmrc</U> option to do this automatically. You can
+enable it with: <BR>
+<TT>show_permissions = yes</TT>
+<P>
+
+When you have that option enabled, Charm automatically places a line at
+the top of your post. You can delete this line when you write your post,
+if you'd like. It's also only placed there if you set a security level
+before you begin writing the post itself. That line reads as follows,
+based on the security level:
+<P>
+
+<UL>
+<LI> private: <U>[ Private only. ]</U>
+<LI> friends: <U>[ To my friends. ]</U>
+<LI> custom: <U>[ To <I>list of friend groups</I>. ]</U>
+</UL>
+<P>
+
+If it's a list of friend groups, the group names are prepended with "the";
+for instance, if you are posting to your "Interesting People" and 
+"Computer Geeks" friend groups, the line will read: <BR>
+<U>[ To the Interesting People, the Computer Geeks. ]</U>
+<P>
+
+You can change what a group is called there through a <U>.charmrc</U>
+option, as follows: <BR>
+<TT>groupheader = <I>GroupName</I>,<I>header text</I></TT>
+<P>
+
+For instance, if you have a friends group name that's just "cgeeks", it
+probably won't look very good in the header line. So, if you use: <BR>
+<TT>groupheader = cgeeks,my computer geek buddies</TT> <BR>
+then when you restrict a post to that group, you'll get the much nicer: <BR>
+<U>[ To my computer geek buddies. ]</U> <BR>
+at the top of your post.
+<P>
+
+You can have as many <U>groupheader</U> lines in your <U>.charmrc</U>
+file as you want.
+<P>
+
+<A NAME="x_post_write"><H3>Writing Your Post</H3></A>
+
+You can write and edit your post by selecting "<TT>e</TT>" from the
+post menu. This will start up an editor. Charm figures out which editor
+to use by sequentially trying the following (i.e., the first thing
+that works is what it'll do):
+<P>
+
+<OL>
+
+<LI> It checks your <U>.charmrc</U> file for a line like the following: <BR>
+<TT>editor = <I>editor_program</I></TT> <BR>
+where <I>editor_program</I> is the editing program that you want to use.
+If it finds it, it uses it.
+<P>
+
+<LI> It checks your environment for the <U>VISUAL</U> variable, and, if you
+     have it set, it uses that.
+<P>
+
+<LI> It checks your environment for the <U>EDITOR</U> variable, and, if you
+     have it set, it uses that.
+<P>
+
+<LI> It tries to start the <U>vi</U> editor.
+
+</OL>
+<P>
+
+You write your post in your editor, just like editing any file in that
+editor. You can save and then quit your editor, change other options in
+Charm's post menu, and come back into the editor, if you want, as many
+times as you want.
+<P>
+
+By default, Charm stores drafts of posts in the <U>.ljdrafts</U> directory
+under your home directory. You can change this in your <U>.charmrc</U>,
+with: <BR>
+<TT>draft_dir = <I>directory</I></TT> <BR>
+(Substitute the directory path you want to use for <I>directory</I>.
+Unix users can use <U>~ </U> as shorthand for their home
+directory, i.e., the default is <U>~/.ljdrafts</U>)
+<P>
+
+<A NAME="x_post_preview"><H3>Previewing Your Post</H3></A>
+
+You can read your post, without invoking the editor, by selecting
+"<TT>d</TT>" from the post menu. If you've selected a pager program,
+the post will be displayed page-by-page using it. If you haven't, Charm
+will try to use the <U>more</U> program; if it can't, the post will simply
+be dumped to the screen.
+<P>
+
+You can select a pager program via one of the following methods:
+<P>
+
+<OL>
+<LI> Set the <U>pager</U> option in your <U>.charmrc</U>, as follows: <BR>
+     <TT>pager = <I>pager_program</I></TT> <BR>
+     where <I>pager_program</I> is the pager you want to use.
+<P>
+<LI> Set the <U>PAGER</U> environment variable.
+</OL>
+<P>
+
+<A NAME="x_post_spell"><H3>Spell-Checking</H3></A>
+
+If your editor has a spell-checking mode, you can do all of your
+spellchecking use that.
+<P>
+
+If you'd like to use an external spellchecker (or HTML validator or any
+other "review this text" program), you can select "<TT>v</TT>" from the
+post menu. This will invoke the spellchecker on the text of your post.
+When you're done spellchecking, just quit the spellchecker to return
+to Charm.
+<P>
+
+By default, Charm uses <U>aspell</U> as the spellchecking program. To
+change this, set the following option in your <U>.charmrc</U>: <BR>
+<TT>spellchecker = <I>spellcheck_program</I></TT> <BR>
+where <I>spellcheck_program</I> is the checker program you want to use.
+<P>
+
+<A NAME="x_post_filter"><H3>Applying Filters</H3></A>
+
+You may want to apply one or more filters to your draft before posting it.
+Examples of such text filters include: <BR>
+<UL>
+<LI> <A HREF="http://daringfireball.net/projects/markdown/">Markdown</A> (convert simple mark-up into HTML tags)
+<LI> <A HREF="http://daringfireball.net/projects/smartypants/">SmartyPants</A> (translate plain ASCII characters into typographic HTML)
+<LI> <A HREF="http://code.google.com/p/pytextile/">Textile</A> (another simple markup-to-HTML filter)
+<LI> <A HREF="http://directory.fsf.org/project/talkfilters/">GNU Talk Filters</A> (chef, jive, etc.)
+</UL>
+
+To do so, select "<TT>x</TT>" from the post menu.
+<P>
+
+You will then be prompted to enter the path to your filters. If you have
+an entire series of filters that you commonly use, you'll probably want to
+put them into a shell script. Charm passes the text of your draft on
+standard input (stdin), and reads the filter output on standard out (stdout).
+For instance, if you're trying to invoke Markdown, you'd enter: <BR>
+<TT>Markdown.pl --html4tags</TT> <BR>
+Markdown.pl would need to be in your path, or you'd need to provide the
+full path to the command.
+<P>
+
+If you frequently use the same filter and you want it to be the default when
+you select a filter, set the following option in your <U>.charmrc</U>: <BR>
+<TT>default_filter = <I>filter</I></TT> <BR>
+where <I>filter</I> is the filter path and arguments.
+<P>
+
+Your draft will be saved prior to applying any filters. You can, from the
+post menu, revert to that pre-filtered draft, by selecting "<TT>X</TT>".
+Note that this will not only reverse all filters, it will reverse all manual
+changes made after you first applied a filter.
+<P>
+
+Charm permanently saves the pre-filtered draft as <U><I>draftname</I>.raw</U>
+
+<A NAME="x_post_session"><H3>Saving and Resuming Sessions, and Offline Posting</H3></A>
+
+At any time, you can copy your post (both text and posting options) to an
+arbitrary file, by selecting "<TT>f</TT>" from the post menu. You'll be
+prompted for a filename to save the post under.
+<P>
+
+If you quit Charm while you're halfway through a post, Charm will ask
+you if you'd like to save your session. If you say yes, then Charm will
+save the post and all associated posting options. You can resume your 
+post at a later date, in one of two ways.
+<P>
+
+The first way is to use the <TT>-r <I>draft_file</I></TT> command-line
+option. You'll need to know which draft you want; normally, when you
+quit Charm midway through a session, it'll tell you what the draft file
+name is. When you start Charm with this option, it reads in the draft
+and posting options (so if you go to the post menu, you'll see your
+draft in progress there).
+<P>
+
+This first way is especially handy in conjunction with the
+<TT>-q</TT> quick-post option, where it's useful for offline posting --
+write your post while you're offline, quit, and then use: <BR>
+<TT>charm -q -r <I>draft_file</I></TT> <BR>
+to post it when your computer is back online.
+<P>
+
+The other way is to do it interactively, by selecting "<TT>r</TT>" from
+the main menu. This will take you to the "resume draft" menu. You'll
+have two options. The first is to select "<TT>f</TT>" from the menu,
+and type in the draft file name. The other is to select "<TT>l</TT>",
+which will present you with a menu of all your unposted drafts, showing
+the time when you began each draft and what their subject lines (or
+first lines of post text) are. Once you select a draft, you'll be
+placed in the post menu.
+<P>
+
+<A NAME="x_post_time"><H3>Post Time</H3></A>
+
+When Charm sends a post to the server, it automatically posts it with
+the current local time.  If the post attempt fails due to a server issue,
+it will retain that time and continue to try to use it on subsequent
+post attempts.
+<P>
+
+You may, however, want to post with a different date, probably one from
+the past. In that case, you can change your post date and time with the
+"<TT>t</TT>" selection from the post menu. If you do so, you may also
+want to select "<TT>o</TT>" then "<TT>b</TT>" to turn on backdating
+(assuming you don't want the post to show up on your friend's lists
+of posts for today).
+<P>
+
+<A NAME="x_post_send"><H3>Sending Your Post</H3></A>
+
+When you're finished writing up your post, and selecting the posting
+options, use "<TT>u</TT>" on the post menu to upload your post to the
+server.
+<P>
+
+Once you've successfully sent the post, Charm will erase the draft, but
+it may keep a copy in the archive (see "<A HREF="#x_archive">Automatic
+Archival</A>").
+<P>
+
+<A NAME="x_post_template"><H3>Using Post Templates</H3></A>
+
+You can pre-define one or more templates to be used for posting. This lets you 
+save your favorite combination of options, and even define a default post
+body.
+<P>
+
+From the main menu, select "<TT>t</TT>" to enter the name of a template to
+read, before entering the post menu. This will populate your post with
+the contents of that template. Then, you're free to change everything,
+just like any other post.
+<P>
+
+You can also specify the template to use from the command line. Use:
+<TT>charm -T <I>template_file</I></TT> <BR>
+where <I>template_file</I> is the path to the template file.
+<P>
+
+If you want to always use the same default template (except when you
+specifically select another template), put the following line in
+your <U>.charmrc</U>: <BR>
+<TT>default_template = <I>template</I></TT> <BR>
+where <I>template</I> is the full path of your template file.
+<P>
+
+A template file takes the exact format as an archive file, so you can
+easily turn an archived post into a template if you want. Here's
+the format for reference. You can use or skip whatever parameters you'd
+like.
+<P>
+
+<BLOCKQUOTE>
+<TT>Subject:</TT> <I>subject</I> <BR>
+<TT>Journal:</TT> <I>LiveJournal community</I> <BR>
+<TT>Category:</TT> <I>blog category tag</I> <BR>
+<TT>Tags:</TT> <I>LiveJournal tags or blog keyword tags</I> <BR>
+<TT>Mood:</TT> <I>LiveJournal mood</I> <BR>
+<TT>Picture:</TT> <I>LiveJournal userpic</I> <BR>
+<TT>Music:</TT> <I>LiveJournal music</I> <BR>
+<TT>Security:</TT> <I>LiveJournal security</I> <BR>
+<TT>Friends:</TT> <I>LiveJournal friend groups for custom security</I> <BR>
+<TT>Options:</TT> <I>LiveJournal posting options</I>
+<P>
+
+<I>Your post body is at the end, separated from the headers by a blank line.</I>
+</BLOCKQUOTE>
+
+Template options are always overridden by command-line options,
+and you can always edit everything prior to posting.
+<P>
+
+<A NAME="x_editing"><H2>Editing Existing Posts</H2></A>
+
+You can use Charm to edit existing posts, by selecting "<TT>e</TT>"
+from the main menu. You'll be taken to the previous post selection
+menu. 
+<P>
+
+There, you should start by selecting "<TT>j</TT>" to choose what journal
+to take the post from, if it's not your default journal.
+<P>
+
+Then, you'll need to decide how to find the post you want. You can select:
+<P>
+<UL>
+<LI> "<TT>l</TT>". Select your last (most recent) post.
+<P>
+<LI> "<TT>n</TT>". Select from the last <I>N</I> entries. You'll be asked
+     how many entries you want to select from. Charm will download the
+     times and subject lines of those most recent entries, and show you
+     a menu of them, so you can pick which one you want.
+<P>
+<LI> "<TT>d</TT>". Select from entries posted on a given day. You'll be
+     asked for a date. Charm will download the times and subject lines of
+     your posts on that date, and show you a menu of them, so you can pick
+     which one you want.
+</UL>
+<P>
+
+Once you've selected a post in this manner, select "<TT>e</TT>". Charm
+will retrieve all the relevant post information from the server. Then,
+you'll be taking to the editing menu.
+<P>
+
+The editing menu is essentially identical to the post menu. There's one
+thing you can't do -- change the journal that this post goes to. And there's
+one thing that you can only do from this menu: select "<TT>w</TT>" to
+wipe out this post from the server, deleting it.
+<P>
+
+If you quit Charm while in the middle of an edit, it's treated exactly
+like you quit in the middle of writing a post -- you can opt to save your
+session and resume it later.
+<P>
+
+When you select "<TT>u</TT>" and successfully upload your edited post,
+Charm erases the draft file, but it may keep a copy in the archive.
+<P>
+
+<A NAME="x_archive"><H2>Automatic Archival</H2></A>
+
+When you post an entry using Charm, Charm will, by default,
+save a copy of that post locally, to your archive directory. To
+turn this behavior off, put the following line in your <U>.charmrc</U>: <BR>
+<TT>archive = no</TT>
+<P>
+
+Similarly, when you edit an existing journal entry using Charm, Charm
+will, by default, save a copy of that post locally, to your archive
+directory. To turn this behavior off, put the following line in your
+<U>.charmrc</U>: <BR>
+<TT>archive_edits = no</TT>
+<P>
+
+When a post is saved after editing, the filename it's saved with is a
+regular post's filename with <U>_ed<I>YYYYMMDDhhmm</I></U> appended
+(representing the year, month, date, hour, and minute the post was edited).
+To just overwrite the original post in the archive, put the following
+line in your <U>.charmrc</U>: <BR>
+<TT>archive_overwrite = yes</TT>
+<P>
+
+Normally, posts are saved directly under the archive directory. If you
+post using multiple usernames, post to various communities, and so forth,
+all of the posts get put together under that single directory. If you'd
+like to separate posts by username or community name, so that each journal
+gets a subdirectory of its own, put the following line in your 
+<U>.charmrc</U>: <BR>
+<TT>archive_subdirs = yes</TT> <BR>
+(Any further subdirectories needed by the <U>organize</U> configuration
+parameter will be placed under the journal name's subdirectory.)
+<P>
+
+Note that the <U>archive_subdirs</U> configuration parameter is ignored
+by the synchronization/archival download; it is only used when you post
+or edit. Consequently, if you have this parameter turned on, and you'd like
+synchronization/archival to write to the same directory, when you 
+download posts, you'll need to specify the path to that username
+subdirectory as the archive directory using the
+<TT>-a&nbsp;<I>directory</I></TT> command-line option, or select the
+directory interactively from the archive menu.
+<P>
+
+<A NAME="x_xpost"><H2>Cross-Posting</H2></A>
+
+You can cross-post to other blogs, from an archive file. To do so,
+make sure archiving it turned on, then post in quick mode using the
+cross-post option: <BR>
+<TT>charm -q -u <I>username</I> -x <I>archive-file</I></TT>
+<P>
+
+You can override any options, such as tags, used in the original post,
+by supplying different options on the command line.
+<P>
+
+<A NAME="x_friends"><H2>Friend List Management</H2></A>
+
+From within Charm, you can list your friends, add new friends, remove
+existing friends, and edit the groups and colors of your current friends.
+To do this, select "<TT>f</TT>" from the main menu, and then
+"<TT>f</TT>" again from the administration menu.
+<P>
+
+<A NAME="x_friends_list"><H3>Listing Friends</H3></A>
+
+Select "<TT>l</TT>" to list your friends. You'll get back a table of 
+usernames and usernames. Communities will be marked with a <U>C</U>,
+shared journals will be marked with a <U>S</U>, and syndicated feeds
+will be marked with a <U>Y</U>.
+<P>
+
+<A NAME="x_friends_add"><H3>Adding a New Friend</H3></A>
+
+To add someone as a friend, select "<TT>f</TT>". Then, enter that person's
+username. You will then be presented with a list of your friend groups.
+Enter the list of numbers corresponding to the groups that you want to
+put your friend in. (Normally, you will want to select at least
+"Default View", which makes that friend show up on your regular friends
+page.) Next, you'll be shown a list of colors. You'll be asked to choose
+a background color to use for that friend's posts. You'll do the same
+for a foreground color. Then, Charm will tell the server to add that friend.
+<P>
+
+<A NAME="x_friends_sub"><H3>Removing a Friend</H3></A>
+
+To un-friend someone, select "<TT>u</TT>", then enter their username. 
+Charm will tell the server to remove that person as your friend.
+<P>
+
+<A NAME="x_friends_edit"><H3>Editing an Existing Friend</H3></A>
+
+You can edit an existing friend by selecting "<TT>e</TT>". First, Charm will
+download some data about your friends, then ask you for the username of the
+friend that you want to edit. You will be taken to a new menu for editing
+a friend. From this menu, you can select the following:
+<P>
+
+<UL>
+<LI> "<TT>b</TT>". Change this friend's background color.
+<P>
+<LI> "<TT>f</TT>". Change this friend's foreground color, 
+<P>
+<LI> "<TT>g</TT>". Change the list of groups this friend is part of. 
+     You'll be shown a list of your friends groups, and asked to enter a
+     list of numbers corresponding to the groups that you want this friend
+     to be in.
+</UL>
+<P>
+
+Once you're done changing those options, you can finalize your selection
+by selecting "<TT>u</TT>"; Charm will update the server will the new
+friend information.
+<P>
+
+<A NAME="x_groups"><H2>Friends Group Management</H2></A>
+
+From within Charm, you can list your friends groups, add new groups, delete
+existing groups, rename groups, change the sort order of groups, and 
+make groups public or private. To do this, select "<TT>f</TT>" from the
+main menu, and then "<TT>g</TT>" from the administration menu.
+<P>
+
+<A NAME="x_groups_list"><H3>Listing Your Groups</H3></A>
+
+When you select "<TT>l</TT>" to list your friends groups, you are shown
+a sorted table that has, for each group, the group name, its sort order
+(lower numbers come first in the list), whether or not it's public
+(can people other than yourself see
+<TT>http://<I>your_journal_url</I>/friends/<I>groupname</I></TT>), which
+bit number it uses, and what the group mask is (the group mask is just
+2 to the power of the bit number).
+<P>
+
+<A NAME="x_groups_add"><H3>Adding a New Friends Group</H3></A>
+
+To add a new friends group, select "<TT>a</TT>". Charm will retrieve a
+list of your existing friends groups; if you already have 30 friend groups,
+you cannot add any more (this is a server restriction). Next, you'll be
+asked to enter a name for the new group. Then, you'll be prompted for a
+sort order number. Choose a number that places the group where you want
+it. For instance, if you want it between groups SportsFans at 10, and
+Buddies at 15, choose a sort order of 11, 12, 13, or 14. Finally, you'll
+be asked whether or not you want this group to be public. Then, Charm
+will tell the server to create the new group.
+<P>
+
+<A NAME="x_groups_sub"><H3>Deleting a Friends Group</H3></A>
+
+To delete a friend group, select "<TT>d</TT>". Charm will retrieve a
+list of your existing groups. You'll be asked to enter the name of the
+group you want to delete. Charm will then tell the server to delete
+that group.
+<P>
+
+<A NAME="x_groups_edit"><H3>Editing the Properties of an Existing Friends Group</H3></A>
+
+To edit an existing friend group, select "<TT>e</TT>". Charm will retrieve
+a list of your existing groups, and ask you to enter the name of one.
+You'll then be taken to a menu where you can select the following:
+<UL>
+<LI> "<TT>n</TT>". Change the name of this group.
+<LI> "<TT>s</TT>". Change the sort order of this group.
+<LI> "<TT>p</TT>". Set whether or not this group is public.
+</UL>
+When you're done making your selections, choose "<TT>u</TT>" to update
+the server with the edited group information.
+<P>
+
+<A NAME="x_bans"><H2>Banning Users from Your Journal or Community</H2></A>
+
+Charm supports the ability to ban users, and remove bans on users,
+from your journal or a community that you control. These bans are run
+via Charm's interface to the server's administrative console commands.
+<P>
+
+Select "<TT>f</TT>" from the main menu, followed by "<TT>b</TT>",
+to reach the ban management menu.
+<P>
+
+When you ban a user from your journal, they are unable to post comments
+in your journal. You can ban a user by selecting "<TT>b</TT>" from the
+ban menu, and remove the ban on a user that you've banned, by selecting
+"<TT>u</TT>" from the ban menu. In both cases, you'll be prompted for
+a username, and then Charm will notify the server of the ban or unban.
+<P>
+
+When you ban a user from a community, they are unable to post entries
+or comments in that community. Also, if they are not currently a member
+of the community, they won't be able to join it. You can execute a
+community ban by selecting "<TT>e</TT>" from the ban menu. To remove the
+ban, thus allow the user back in, select "<TT>a</TT>" from the ban menu.
+In both cases, you'll be prompted for the community's name as well as
+a username.
+<P>
+
+<A NAME="x_comm"><H2>Managing Access to Communities and Shared Journals</H2></A>
+
+Charm supports the ability to add users to and remove users from
+communities. It also allows you to manage posting access to shared
+journals. These capabilities are run via Charm's interface to the
+server's administrative console commands.
+<P>
+
+<A NAME="x_comm_comm"><H3>Managing User Memberships in a Community</H3></A>
+
+Select "<TT>f</TT>" from the main menu, followed by "<TT>c</TT>" from
+the administrative menu, to access the community management menu.
+<P>
+
+You can select "<TT>a</TT>" to add a user to a community that you control.
+You will be prompted for both the community name and a username. Note that
+many journal sites will not allow you to add users to communities, due to
+the potential for abuse.
+<P>
+
+You can select "<TT>u</TT>" to unsubscribe a user from a community
+that you control, removing them as a member of that community. You
+will be prompted for both the community name and a username.
+<P>
+
+Note that removing a user from a community does not prevent them from
+re-joining that community. In order to prevent a user from joining the
+community again, you will also need to ban that user from the community.
+<P>
+
+<A NAME="x_comm_shared"><H3>Managing Posting Access to a Shared Journal</H3></A>
+
+Select "<TT>f</TT>" from the main menu, followed by "<TT>s</TT>" from
+the administrative menu, to access the shared journal management menu.
+<P>
+
+You can select "<TT>a</TT>" to allow a user to post to a shared journal
+that you control. You will be prompted for the shared journal's name
+and the username.
+<P>
+
+You can select "<TT>d</TT>" to disallow a user from posting to a
+shared journal that you control. You will be prompted for the shared
+journal's name and the username.
+<P>
+
+<A NAME="x_other"><H2>Other Features</H2></A>
+
+You can invoke a browser from within Charm, in order to view your journal.
+In order to do this, select "<TT>v</TT>" from the main menu. When you quit
+the browser, you'll be returned to Charm. To change the browser that Charm
+uses, set the <U>BROWSER</U> environment variable to the browser program
+that you want to use.
+<P>
+
+You can find out more information about Charm by selecting "<TT>i</TT>"
+from the main menu. This will give you the name of the current version
+of Charm that you're running, as well as other information about the
+program.
+<P>
+
+Charm supports operating via an HTTP proxy server. To utilize a proxy,
+set the <U>HTTP_PROXY</U> environment variable to the 
+<U>site:port</U> combination that you want to use.
+<P>
+
+<A NAME="x_help"><H2>Getting Help</H2></A>
+
+Charm is supported through LiveJournal's
+<A HREF="http://www.livejournal.com/community/ljcharm/">ljcharm
+community</A>. You can ask questions and receive help if you need it.
+<P>
+
+More information about Charm, as well as the latest release, is available
+through its <A HREF="http://ljcharm.sourceforge.net/">home page</A> and
+through its  <A HREF="http://sourceforge.net/projects/ljcharm/">SourceForge
+project page</A>.
+<P>
+
+</DIV></TD</TR>
+<TR><TH>Copyright (C) 2004. Email <I>evilhat</I><I>@</I><I>livejournal.com</I> with questions and comments.</TH></TR>
+</TABLE>
+</TD>
+
+</TR>
+
+</TABLE>
+</BODY>
+</HTML>

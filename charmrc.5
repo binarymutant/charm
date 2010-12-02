@@ -1,0 +1,236 @@
+.TH charmrc 5 "November 2004"
+.SH NAME
+charmrc \- Configuration file for Charm
+
+.SH DESCRIPTION
+
+A charmrc file is a configuration file for Charm, a client for LiveJournal
+and other blogging sites which support the LiveJournal protocol. It is
+a text file.
+
+A charmrc file can include other charmrc files, with the following:
+.PP
+    include FILENAME
+.PP
+Files are read in the order that they are specified. When that directive
+is used, processing of the current configuration file is stopped, the
+included configuration file is read and processed, and then processing
+on the current configuration file is resumed.
+
+An active line in a charmrc file will have the format:
+.PP
+    name = value
+.PP
+Blank lines are ignored. Lines that begin with a pound-sign (#) are
+comments, and are ignored. Leading spaces and tabs are ignored. 
+
+All boolean options can be on ("on", "yes", "y", "true", "t", "1" all work)
+or off ("off", "no", "n", "false", "f", "0").
+
+Almost all options can be overridden interactively. Most things set in
+the configuration file are merely treated as a default.
+
+.SH LOGIN CONFIGURATION
+
+.TP
+.B login = username password [ site ]
+Specifies a journal user for a LiveJournal-based site. The site is an
+optional hostname, such as
+.I www.livejournal.com
+
+.TP
+.B hlogin = username MD5password [ site ]
+Like 
+.B login
+except the password specified is an MD5 hash digest of the actual password.
+
+.TP
+.B atomblog = username password [ URIpath ]
+Specifies a journal user for an Atom API-based site. The URIpath is an
+optional URL for feed discovery, such as
+.I https://www.blogger.com/atom/
+
+.TP
+.B hatomblog = username MD5password [ URIpath ]
+Like 
+.B atomblog
+except the password specified is an MD5 hash digest of the actual password.
+
+.TP
+.B metaweb = username password URIpath
+Specifies a journal user for a MetaWeb API-based site. The URIpath is the
+URL for the site's XML-RPC MetaWeb interface, such as 
+.I http://testuser.wordpress.com/xmlrpc.php
+
+.TP
+.B default_user = username
+Because
+.B login
+and 
+.B hlogin
+and
+.B atomblog
+and
+.B hatomblog
+and
+.B metaweb
+may be specified multiple times, this parameter allows the user to specify
+which identity to use by default.
+
+.TP 
+.B journal = journalname
+By default, Charm uses the journal of the current user. However, some people
+post to a community or a shared journal more frequently than they do to their
+own journal. This option allows the user to specify that journal by default,
+rather than their own.
+
+.TP
+.B url = interface_url
+By default, Charm posts to LiveJournal. This parameter can be used to
+specify a different default, rather than specifying the site in
+.B login
+or
+.B hlogin
+(but this must be a full URL, not just the hostname).
+
+.SH FRIENDS-CHECKING CONFIGURATION
+
+.TP
+.B checkdelay = minutes
+Specifies the number of minutes to wait between each attempt to check
+whether friends have posted journal updates.
+
+.TP
+.B checkgroups = groups
+Specifies the friend groups to check. This is a comma-delimited list,
+such as "Group1,Group2,Group3".
+
+.SH GENERAL ARCHIVAL CONFIGURATION
+
+.TP
+.B archive_dir = directory
+Specifies the directory to save completed posts in.
+
+.TP
+.B organize = type
+Specifies how to organize the archive directory. 
+.I type
+can be
+.B none
+(no subdirectories),
+.B year
+(subdirectories by year), or
+.B month
+(subdirectories by month within subdirectories by year).
+
+.SH POSTING CONFIGURATION
+
+.TP
+.B editor = program
+Use this program as the editor for posts.
+
+.TP
+.B pager = program
+Use this program as the pager when previewing posts.
+
+.TP
+.B spellchecker = program
+Use this program as the spellchecker for posts.
+
+.TP
+.B default_filter = program
+Use this program as the default when you choose to text-filter a post.
+
+.TP
+.B default_template = templatefile
+Load this template file as the default content for posts.
+
+.TP
+.B draft_dir = directory
+Use this directory as the place to save drafts in progress.
+
+.TP
+
+.TP
+.B autodetect = boolean
+Use XMMS music detection to automatically determine what music to use for
+a post?
+
+.TP
+.B autoformat = boolean
+Let the server HTML format our post, or do it ourselves?
+
+.TP
+.B backdate = boolean
+Backdate our post so it does not appear on friends pages?
+
+.TP
+.B comments = boolean
+Allow comments on this post?
+
+.TP
+.B noemail = boolean
+Do not email us when we receive comments on this post?
+
+.TP
+.B security = level
+Sets the security level, where 
+.I level
+can be 
+.B public
+(everyone),
+.B private
+(just the poster),
+.B friends
+(friends of the poster),
+or a list of friend group names separated by commas.
+
+.TP
+.B show_permissions = boolean
+Automatically add a header to the entry, stating the security level?
+
+.TP
+.B groupheader = group,text
+When adding permission headers, use
+.I text
+instead of the friend group name
+.I group
+
+.TP 
+.B commpic = journal,userpic
+Sets the default userpic used when posting to a community or shared journal.
+
+.SH POSTING AND EDITING ARCHIVAL OPTIONS
+
+.TP
+.B archive = boolean
+Archive an entry automatically after it has been posted?
+
+.TP
+.B archive_edits = boolean
+Archive an entry automatically after it has been edited (modified on
+the server)?
+
+.TP
+.B archive_overwrite = boolean
+When archiving an edited entry, overwrite the original, or save the
+edit as a separate file?
+
+.TP
+.B archive_subdirs = boolean
+Use a separate subdirectory for each username, community, and shared 
+journal, or put all archived posts under a single directory?
+
+.SH EXAMPLES
+There is an example charmrc file. It can usually be found in
+.B /usr/share/doc/charm/sample.charmrc
+
+.SH MANUAL
+There is a full manual for Charm. It can usually be found in
+.B /usr/share/doc/charm/charm.html
+
+.SH SEE ALSO
+charm(1)
+
+.SH AUTHOR
+Lydia Leong (evilhat@livejournal.com)

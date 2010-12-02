@@ -1,0 +1,163 @@
++---------------------------------------------------------------------------+
+|                                                                           |
+|    CHARM - A LiveJournal, Atom, and MetaWeb API client for Python
+|
+|    Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009
+|                  by Lydia Leong
+|    Open Source:  GNU General Public License v2
+|                                                                           |
++---------------------------------------------------------------------------+
+
+
+FEATURES
+
+- Charm is an entirely text-based client. Consequently, its system and
+  hardware requirements are negligible; you just need something that
+  supports the Python interpreter.
+
+- Charm has equal facility across a broad spectrum of blogging platforms.
+  It has full-fledged support for LiveJournal-based sites, but it also
+  supports the Atom API (for Blogger) and the MetaWeb API (for Wordpress,
+  Movable Type, and so on). Atom support requires that you have the
+  Feedparse module from http://feedparser.org/ installed.
+
+- Charm contains four major utilities in a single client: menu-driven
+  posting/editing, "quick" command-line posting, archival, and
+  friends-checking.
+
+- Normal, menu-driven mode. Charm uses menus of single-letter commands,
+  and is thus easy to use. There's a full array of post and edit options.
+
+- "Quick" mode. Command-line-only, reading the body of the post from
+  stdin. This allows very fast posting for casual use. But it also
+  allows input to be piped to a post or taken from an arbitrary file,
+  for filter-like uses. Thus, you could take some text, pipe it to the
+  Enchefferizer (the "Swedish chef" text converter), or to a text-to-HTML
+  converter like Markdown or Textile, and that pipe that  to Charm for 
+  posting to your journal. 
+
+- Friends-checking tool. Background polling mode for friend updates,
+  displayed like the Unix 'newmail' utility. It can check all friends,
+  or just specific friend groups. Even if you don't use Charm for
+  anything else, you might find this useful.
+
+- Mass archiving. This is part of Charm's menu-driven mode. You can
+  download and save part or all of your journal or a community. This
+  is another useful standalone feature, particularly since you can set
+  up your computer to automatically synchronize your offline archive
+  with your online journal on a nightly basis.
+
+- Charm handles multiple usernames and shared journal access, including
+  handling profiles for non-LiveJournal accounts (like DeadJournal).
+  Passwords can optionally be stored/sent as a MD5 hash. It also has the
+  ability to quickly cross-post between multiple journals/blogs.
+
+- Charm has a full set of features for editing and posting. Anything you
+  can do from the LiveJournal posting and editing Web pages, you can do
+  from Charm. Charm can also use an external spellchecker, and it can
+  invoke external filters to modify the message body.
+
+- You can select moods, journals, picture keywords, friend groups, tags,
+  etc. from menus. Unlike other console-based clients, you don't have to
+  type these in; you just pick an option number from a menu.
+
+- Charm supports XMMS-based music detection, if you have the PyXMMS
+  module from http://www.via.ecp.fr/~flo/ installed.
+
+- You can save, and later resume working on, an entry-in-progress.
+  You can also save an entry while your computer is offline, and then
+  quickly post it when you get back online.
+
+- You can set up templates, with default data in each of the fields, along
+  with a default message body.
+
+- You can select online entries to edit in a flexible manner: most
+  recent, last N entries, and by date. Choosing entries by date brings up
+  a calendar of the chosen month, showing the number of posts each day.
+
+- When you post something, there's an option to archive it; you can also
+  optionally archive edits made to posts already online. The archive
+  organization is configurable; you can put all posts in one directory,
+  use subdirectories for each year, and use subdirectories for each
+  month (under subdirectories for each year).
+
+- Charm fully supports listing, adding, removing, and editing friends and 
+  friends groups.
+
+- Charm supports the LiveJournal administrative console commands, so
+  you can use it to manage community membership, manage posting access
+  to shared journals, and manage user bans.
+
+- Charm respects Unix environment variables for default programs.
+
+- Charm has proxy support. Python supports proxies transparently; just set
+  your HTTP_PROXY environment variable to proxyhost:portnumber.
+
+
+GETTING STARTED
+
+A manual has been included with this distribution. Read the "charm.html"
+file in a browser for extensive details on how to install and use Charm.
+
+For help, type:  charm --help
+Normally, type:  charm
+
+Also, look at sample.charmrc and make a .charmrc file in your home
+directory.
+
+A minimal .charmrc file for LiveJournal contains the line:
+    login = yourusername yourpassword
+(Fill in your own LiveJournal username and password.)
+
+A minimal .charmrc file for Blogger contains the line:
+    blogger = yourusername yourpassword
+(Fill in your own Blogger username and password.)
+
+
+WHERE TO FIND MORE INFORMATION
+
+Charm's home page is at http://ljcharm.sourceforge.net/
+
+There, you can read the Charm manual and other documentation, download
+the latest version, and find links to the Charm LiveJournal community 
+and other support resources.
+
+
+INSTALLATION
+
+If you wish to do so, you can just run Charm directly out of the directory
+that you unpacked it into, or wherever else you care to place the
+necessary files (charm, and ljcharm.py).
+
+However, if you have access to do so (on Unix systems, this will generally
+require root privileges), and you either have at least Python 1.6 or the
+Distutils module installed, you can install Charm in your main Python
+modules directory, using "python setup.py install".
+
+For more information, see Charm's manual (included as charm.html).
+
+
+COMPATIBILITY
+
+Charm was written for Python 2.5 on a Unix system.
+
+It should work with later as well as earlier versions of Python, going
+back as early as Python 1.5. (If you encounter problems that seem
+version-specific, please email the author.)
+
+Because Charm is written in Python, it should be reasonably cross-platform.
+It should work on any Unix-based system (including Linux). It is likely to
+work on Windows, and it will probably work on the Macintosh. (Again, 
+please email the author with portability problems.)
+
+Of course, you will need to have Python installed on your machine.
+See http://www.python.org/ to download a copy of Python. (Linux users
+will probably have Python installed already.)
+
+
++---------------------------------------------------------------------------+
+|                                                                           |
+|    Please email the author at evilhat@livejournal.com with any
+|    comments, suggestions, and bug reports.
+|                                                                           |
++---------------------------------------------------------------------------+

@@ -1,0 +1,283 @@
+.TH charm 1 "November 2004"
+.SH NAME
+charm \- Client for LiveJournal-based blogging sites
+
+.SH SYNOPSIS
+.B charm
+[
+.B -h, \-\-help
+]
+
+.B charm
+[
+.B -o, \-\-options
+]
+
+.B charm 
+[
+.B -f, \-\-file
+.I FILENAME
+] [
+.B -u, \-\-user
+.I USERNAME
+] [
+.B -c, \-\-check
+] [
+.B -i, \-\-interval
+.I MINUTES
+] [
+.B -g, \-\-group
+.I FRIENDGROUP
+]
+
+.B charm 
+[
+.B -f, \-\-file
+.I FILENAME
+] [
+.B -u, \-\-user
+.I USERNAME
+] [
+.B -z, \-\-sync
+] [
+.B -a, \-\-archive
+.I DIR
+]
+
+.B charm 
+[
+.B -f, \-\-file
+.I FILENAME
+] [
+.B -u, \-\-user
+.I USERNAME
+] [
+.B -l, \-\-login
+] [
+.B -n, \-\-nologin
+] [
+.B -d, \-\-drafts
+.I DIR
+] [
+.B -a, \-\-archive
+.I DIR
+] [
+.B -r, \-\-resume
+.I DRAFTFILE
+] [
+.B -T, \-\-template
+.I TEMPLATE
+] [
+.B -x, \-\-xpost
+.I ARCHIVEFILE
+] [
+.B -q, \-\-quick
+] [
+.B -j, \-\-journal
+.I JOURNAL
+] [
+.B -s, \-\-subject
+.I "SUBJECT"
+] [
+.B -p, \-\-permit
+.I PERMISSION
+] [
+.B -m, \-\-mood
+.I MOOD
+] [
+.B -k, \-\-pic
+.I KEYWORD
+] [
+.B -t, \-\-tag
+.I "TAG"
+] [
+.B -M, \-\-music
+.I "MUSIC"
+] [
+.B -A, \-\-autodetect
+] [
+.B \-\-autoformat
+.I STATUS
+] [
+.B \-\-backdate
+.I STATUS
+] [
+.B \-\-comments
+.I STATUS
+] [
+.B \-\-noemail
+.I STATUS
+]
+
+.SH DESCRIPTION
+
+Charm is a client for LiveJournal, Blogger, and other blogging sites that
+support the LiveJournal protocol, the Atom API, or the MetaWeb API. It can
+be used for posting, editing, journal administration, offline synchronization,
+and checking for friend updates.
+
+.SH GENERAL OPTIONS
+
+.TP
+-h, \-\-help
+Print a help message.
+
+.TP
+-o, \-\-options
+Print the posting options.
+
+.TP
+-f, \-\-file FILENAME
+Specify the configuration file to read at startup.
+
+.TP
+-u, \-\-user USERNAME
+Specify the journal user to perform operations as.
+
+.SH FRIENDS-CHECKING OPTIONS
+
+.TP
+-c, \-\-check
+Utilize friends-checking mode.
+
+.TP
+-i, \-\-interval MINUTES
+Specify how many minutes to wait between checks.
+
+.TP
+-g, \-\-group FRIENDGROUP
+Specify which friend groups to limit check to. Can be specified multiple times.
+
+.SH SYNCHRONIZATION OPTIONS
+
+.TP
+-z, \-\-sync
+Utilize synchronization (journal download) mode.
+
+.TP
+-a, \-\-archive DIRECTORY
+Save synchronized posts to this directory.
+
+.SH POSTING OPTIONS
+
+.TP
+-l, \-\-login
+Log in when Charm is started.
+
+.TP
+-n, \-\-nologin
+Do not log in when Charm is started.
+
+.TP
+-d, \-\-drafts DIRECTORY
+Use this directory to save in-progress journal entry drafts.
+
+.TP
+-a, \-\-archive DIRECTORY
+Use this directory to save completed posts.
+
+.TP
+-r, \-\-resume DRAFTFILE
+Resume a previous session, reading from this saved draft file.
+
+.TP
+-T, \-\-template TEMPLATE
+Read the content of this template file at startup, pre-populating the post.
+
+.TP
+-x, \-\-xpost ARCHIVEFILE
+Prepare to cross-post, reading from a saved archive file.
+
+.TP
+-q, \-\-quick
+Non-interactive mode. Read journal entry text from standard input, and post
+it immediately, rather than using the menu-based interactive editing.
+
+.TP
+-j, \-\-journal JOURNAL
+Specify the journal to post to.
+
+.TP
+-s, \-\-subject "SUBJECT"
+Use this as the subject line of the journal entry.
+
+.TP
+-p, \-\-permit PERMISSION
+Use this for the post permissions. Can be "public", "private", "friends",
+or a list of friend groups separated by commas.
+
+.TP
+-m, \-\-mood MOOD
+Use this for the mood of this entry.
+
+.TP
+-k, \-\-pic KEYWORD
+Use this picture keyword for the userpic of this entry.
+
+.TP
+-t, \-\-tag TAG
+Use this tag for this entry.
+
+.TP
+-M, \-\-music "MUSIC"
+Use this as the music for this entry.
+
+.TP
+-A, \-\-autodetect
+Use XMMS to automatically determine what music to use for this entry.
+
+.TP
+\-\-autoformat=[on|off]
+Let the site automatically HTML format this post, or do it ourselves?
+
+.TP
+\-\-backdate=[on|off]
+Backdate this entry, so it does not show up on the friends pages of our
+friends?
+
+.TP
+\-\-comments=[on|off]
+Allow people to post comments on this entry?
+
+.TP
+\-\-noemail=[on|off]
+Do not send us email when someone posts a comment on this entry?
+
+.SH ENVIRONMENT
+
+.TP 12
+.B VISUAL
+The default editor to use for writing entries.
+
+.TP 12
+.B EDITOR
+The default editor to use for writing entries, if VISUAL is not set.
+
+.TP 12
+.B PAGER
+The default pager to use when previewing entries.
+
+.TP 12
+.B BROWSER
+The default Web browser to use when viewing a journal.
+
+.TP 12
+.B HTTP_PROXY
+The HTTP proxy to use, if any, in the format
+.I site:port
+
+.SH FILES
+
+.TP 12
+.I ~/.charmrc
+The default location of the charmrc file for a user.
+
+.SH MANUAL
+There is a full manual for Charm. It can usually be found in
+.B /usr/share/doc/charm/charm.html
+
+.SH SEE ALSO
+charmrc(5)
+
+.SH AUTHOR
+Lydia Leong (evilhat@livejournal.com)
