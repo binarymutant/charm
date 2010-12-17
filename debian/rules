@@ -1,0 +1,38 @@
+#!/usr/bin/make -f
+
+include /usr/share/dpatch/dpatch.make
+DEB_PYTHON_SYSTEM=pysupport
+
+clean: unpatch
+	dh_testdir
+	dh_testroot
+	rm -rf build/
+	rm -f *.pyc
+	python setup.py clean
+	dh_clean
+
+build:
+
+install: patch
+	python setup.py install --prefix=/usr/ --install-lib=usr/share/charm --root $(CURDIR)/debian/charm
+	dh_install ljcharm.py charm usr/share/charm/
+	dh_link usr/share/charm/charm usr/bin/charm
+
+binary-arch:
+
+binary-indep: build install
+	dh_testdir
+	dh_testroot
+	dh_installchangelogs CHANGES.charm
+	dh_installdocs charm.html sample.charmrc README.charm
+	dh_pysupport
+	dh_installman charm.1 charmrc.5
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+binary: binary-indep
+
+.PHONY: build clean binary-indep binary install

@@ -38,7 +38,7 @@ import getopt
 import time
 import locale
 import stat
-import md5
+import hashlib
 import urllib
 import calendar
 
@@ -47,7 +47,6 @@ try:
     import httplib
     import base64
     import datetime
-    import sha
     atom_ok = 1
 except:
     atom_ok = 0
@@ -289,9 +288,9 @@ def md5digest(sstr):
     #    module. We provide an alternative, for earlier versions.
 
     try:
-	hexd = md5.hexdigest(sstr)
+	hexd = hashlib.md5.hexdigest(sstr)
     except AttributeError:
-	digest = md5.new(sstr).digest()
+	digest = hashlib.md5(sstr).digest()
         hexd = string.join(map(lambda c: "%s%s" % (string.hexdigits[ord(c) / 16], string.hexdigits[ord(c) % 16]), digest), "")
 
     return hexd
@@ -300,7 +299,7 @@ def md5digest(sstr):
 def get_nonce(tstamp):
     "Create a nonce."
 
-    sstr = sha.new("%s:%s" % (tstamp, Client_Name)).hexdigest() 
+    sstr = hashlib.sha.new("%s:%s" % (tstamp, Client_Name)).hexdigest() 
     return "%s %s" % (tstamp, sstr)
 
 
@@ -5808,7 +5807,7 @@ on your blogging service.
 
             tstamp = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
             nonce = get_nonce(tstamp)
-            pdigest = base64.encodestring(sha.new("%s%s%s" % (nonce, tstamp, self.Params["hpassword"])).digest())[:-1]
+            pdigest = base64.encodestring(hashlib.sha.new("%s%s%s" % (nonce, tstamp, self.Params["hpassword"])).digest())[:-1]
             
             headers["Authorization"] = 'WSSE profile="UsernameToken"'
             headers["X-WSSE"] = 'UsernameToken Username="%s", PasswordDigest="%s", Created="%s", Nonce="%s"' % (self.Params["user"], pdigest, tstamp, nonce)
